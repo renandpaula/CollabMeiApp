@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".activity.CadastroActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Pessoa Física"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/cadastro_switch"
+        app:layout_constraintEnd_toStartOf="@+id/cadastro_switch"
+        app:layout_constraintHorizontal_bias="0.695"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cadastro_switch"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Pessoa Jurídica"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/cadastro_switch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.26"
+        app:layout_constraintStart_toEndOf="@+id/cadastro_switch"
+        app:layout_constraintTop_toTopOf="@+id/cadastro_switch"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Switch
+        android:id="@+id/cadastro_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toStartOf="@+id/textView2"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="44dp"
+        android:orientation="vertical"
+        android:padding="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/cadastro_btnCadastrar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cadastro_switch">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textInputLayout10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_edit_text"
+            android:textColorHint="@android:color/white"
+            tools:layout_editor_absoluteX="5dp"
+            tools:layout_editor_absoluteY="33dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/cadastro_TextNome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nome Completo"
+                android:textColorHint="@android:color/white" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textInputLayout11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/background_edit_text"
+            android:textColorHint="@android:color/white"
+            tools:layout_editor_absoluteX="5dp"
+            tools:layout_editor_absoluteY="102dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/cadastro_TextCPF"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:hint="CPF"
+                android:textColorHint="@android:color/white" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textInputLayout14"
+            android:layout_width="395dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/background_edit_text"
+            android:textColorHint="@android:color/white"
+            tools:layout_editor_absoluteX="5dp"
+            tools:layout_editor_absoluteY="179dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/cadastro_TextTelefone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Telefone"
+                android:textColorHint="@android:color/white" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textInputLayout15"
+            android:layout_width="395dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/background_edit_text"
+            android:textColorHint="@android:color/white"
+            tools:layout_editor_absoluteX="5dp"
+            tools:layout_editor_absoluteY="257dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/cadastro_TextEndereco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Endereço"
+                android:textColorHint="@android:color/white" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textInputLayout16"
+            android:layout_width="395dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/background_edit_text"
+            android:textColorHint="@android:color/white"
+            tools:layout_editor_absoluteX="5dp"
+            tools:layout_editor_absoluteY="373dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/cadastro_TextEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="E-mail"
+                android:textColorHint="@android:color/white" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textInputLayout17"
+            android:layout_width="395dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/background_edit_text"
+            android:textColorHint="@android:color/white"
+            tools:layout_editor_absoluteX="5dp"
+            tools:layout_editor_absoluteY="491dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/cadastro_TextSenha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Senha"
+                android:inputType="textPassword"
+                android:textColorHint="@android:color/white" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textInputLayout18"
+            android:layout_width="395dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/background_edit_text"
+            android:textColorHint="@android:color/white"
+            tools:layout_editor_absoluteX="5dp"
+            tools:layout_editor_absoluteY="614dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/cadastro_TextConfirmaSenha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Confirme a Senha"
+                android:textColorHint="@android:color/white" />
+        </android.support.design.widget.TextInputLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/cadastro_btnCadastrar"
+        style="@android:style/Widget.Holo.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/background_btn_entrar"
+        android:text="Cadastrar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.829" />
+
+</android.support.constraint.ConstraintLayout>

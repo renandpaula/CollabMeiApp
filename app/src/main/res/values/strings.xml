@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ColabMEI App</string>
+    <string name="titulo_telaCadastro">Cadastrar nova conta</string>
+    <string name="titulo_telaLogin">Acessar minha conta</string>
 </resources>
