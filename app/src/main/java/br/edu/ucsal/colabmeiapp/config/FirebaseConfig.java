@@ -1,4 +1,4 @@
-package br.edu.ucsal.colabmeiapp.helper;
+package br.edu.ucsal.colabmeiapp.config;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;

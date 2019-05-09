@@ -1,5 +1,6 @@
 package br.edu.ucsal.colabmeiapp.activity;
 
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -7,19 +8,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
-import java.awt.font.TextAttribute;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import br.edu.ucsal.colabmeiapp.R;
+import br.edu.ucsal.colabmeiapp.config.FirebaseConfig;
+import br.edu.ucsal.colabmeiapp.model.Usuario;
 
 public class CadastroActivity extends AppCompatActivity {
 
     private TextInputEditText campoNome, campoRazao, campoCPF, campoCNPJ, campoTelefone, campoEndereco, campoEmail, campoSenha, campoConfirmaSenha;
     private Switch switchTipoUsuario;
+
+    private FirebaseAuth autenticacao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +70,7 @@ public class CadastroActivity extends AppCompatActivity {
     }
 
 
-        public void validarCadastroUsuario(){
+        public void validarCadastroUsuario(View view){
 
             //Recuperar textos digitados pelo usuario
             String textoNome = campoNome.getText().toString();
@@ -77,19 +82,117 @@ public class CadastroActivity extends AppCompatActivity {
             String textoEmail = campoEmail.getText().toString();
             String textoSenha = campoSenha.getText().toString();
             String textoConfirmaSenha = campoConfirmaSenha.getText().toString();
+            String pessoaJuridica = "Pessoa Jurídica";
+            String pessoaFisica = "Pessoa Física";
 
-            if( !textoNome.isEmpty() ) { //verifica se o nome foi preenchido
+            //Verifica se o cadastro é de pessoa juridica
+            if (switchTipoUsuario.isChecked()) {
+                if( !textoRazao.isEmpty() ) { //verifica se a Razao Social foi preenchida
+                    if( !textoCNPJ.isEmpty() ) { //verifica se o CNPJ foi preenchido
 
+                    } else {
+                        Toast.makeText(CadastroActivity.this,
+                                "Preencha o CNPJ!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(CadastroActivity.this,
+                            "Preencha a Razão Social!",
+                            Toast.LENGTH_SHORT).show();
+                }
+            } else {   //Valida as informações de pessoa física
+                if( !textoNome.isEmpty() ) { //verifica se o nome foi preenchido
+                    if( !textoCPF.isEmpty() ) { //verifica se o CPF foi preenchido
+
+                    } else {
+                        Toast.makeText(CadastroActivity.this,
+                                "Preencha o CPF!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(CadastroActivity.this,
+                            "Preencha o nome!",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+//verifica se a senha confirmada é igual a digitada.
+            //Volta ao fluxo normal de validação de cadastro
+            if( !textoTelefone.isEmpty() ) { //verifica se o Telefone foi preenchido
+                if( !textoEndereco.isEmpty() ) { //verifica se o Endereco foi preenchido
+                    if( !textoEmail.isEmpty() ) { //verifica se o Email foi preenchido
+                        if( !textoSenha.isEmpty() ) { //verifica se a senha foi preenchida
+                            if( !textoConfirmaSenha.isEmpty() ) { //verifica se a senha confirmada foi preenchida.
+                                if(textoConfirmaSenha.equals(textoSenha)){
+                                    Usuario usuario = new Usuario();
+                                    usuario.setEndereco(textoEndereco);
+                                    usuario.setEmail(textoEmail);
+                                    usuario.setTelefone(textoTelefone);
+                                    usuario.setSenha(textoSenha);
+                                    if(switchTipoUsuario.isChecked()){ //Usuario tipo PJ
+                                        usuario.setTipo(pessoaJuridica);
+                                        usuario.setNomeXrazao(textoRazao);
+                                        usuario.setCpfXcnpj(textoCNPJ);
+                                    } else { //Usuario tipo PF
+                                        usuario.setTipo(pessoaFisica);
+                                        usuario.setNomeXrazao(textoNome);
+                                        usuario.setCpfXcnpj(textoCPF);
+                                    }
+
+                                    cadastrarUsuario(usuario);
+                                }else{
+                                    Toast.makeText(CadastroActivity.this,
+                                            "As senhas não coincidem!",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                Toast.makeText(CadastroActivity.this,
+                                        "Preencha a confirmação de senha!",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(CadastroActivity.this,
+                                    "Preencha a Senha!",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(CadastroActivity.this,
+                                "Preencha o E-mail!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(CadastroActivity.this,
+                            "Preencha o Endereço!",
+                            Toast.LENGTH_SHORT).show();
+                }
             } else {
                 Toast.makeText(CadastroActivity.this,
-                        "Preencha o nome!",
+                        "Preencha o Telefone!",
                         Toast.LENGTH_SHORT).show();
             }
 
 
         }
 
+    public void cadastrarUsuario (Usuario usuario){
 
+        autenticacao = FirebaseConfig.getFirebaseAutenticacao();
+        autenticacao.createUserWithEmailAndPassword(
+                usuario.getEmail(),
+                usuario.getSenha()
+        ).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                if (task.isSuccessful()) {
+                   Toast.makeText(CadastroActivity.this,
+                           "Usuario cadastrado com sucesso!",
+                           Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+    }
 
 
 
