@@ -1,12 +1,15 @@
 package br.edu.ucsal.colabmeiapp.activity;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -14,6 +17,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
 import br.edu.ucsal.colabmeiapp.R;
 import br.edu.ucsal.colabmeiapp.config.FirebaseConfig;
@@ -23,6 +29,7 @@ public class CadastroActivity extends AppCompatActivity {
 
     private TextInputEditText campoNome, campoRazao, campoCPF, campoCNPJ, campoTelefone, campoEndereco, campoEmail, campoSenha, campoConfirmaSenha;
     private Switch switchTipoUsuario;
+    private ProgressBar loading;
 
     private FirebaseAuth autenticacao;
 
@@ -43,12 +50,14 @@ public class CadastroActivity extends AppCompatActivity {
         campoSenha = findViewById(R.id.cadastro_TextSenha);
         campoConfirmaSenha = findViewById(R.id.cadastro_TextConfirmaSenha);
         switchTipoUsuario = findViewById(R.id.cadastro_switch);
+        loading = findViewById(R.id.cadastro_ProgressBar);
 
         final TextInputLayout layoutNome = findViewById(R.id.textInputLayoutNome);
         final TextInputLayout layoutRazao = findViewById(R.id.textInputLayoutRazao);
         final TextInputLayout layoutCPF = findViewById(R.id.textInputLayoutCPF);
         final TextInputLayout layoutCNPJ = findViewById(R.id.textInputLayoutCNPJ);
 
+        loading.setVisibility(View.GONE);
 
         switchTipoUsuario.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -67,6 +76,8 @@ public class CadastroActivity extends AppCompatActivity {
                 }
             }
         });
+
+
     }
 
 
@@ -138,6 +149,7 @@ public class CadastroActivity extends AppCompatActivity {
                                         usuario.setCpfXcnpj(textoCPF);
                                     }
 
+                                    loading.setVisibility(View.VISIBLE);
                                     cadastrarUsuario(usuario);
                                 }else{
                                     Toast.makeText(CadastroActivity.this,
@@ -173,20 +185,53 @@ public class CadastroActivity extends AppCompatActivity {
 
         }
 
-    public void cadastrarUsuario (Usuario usuario){
+    public void cadastrarUsuario (final Usuario usuario){
 
         autenticacao = FirebaseConfig.getFirebaseAutenticacao();
         autenticacao.createUserWithEmailAndPassword(
                 usuario.getEmail(),
                 usuario.getSenha()
+
         ).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 if (task.isSuccessful()) {
-                   Toast.makeText(CadastroActivity.this,
-                           "Usuario cadastrado com sucesso!",
+
+                    loading.setVisibility(View.GONE);
+                    //Salva os dados do usario no banco de dados
+                    String idUsuario = task.getResult().getUser().getUid();
+                    usuario.setId( idUsuario );
+                    usuario.salvarNoBanco();
+                    finish();
+
+                    //Redireciona o usuario a pagina principal
+                    startActivity(new Intent(getApplicationContext(), InicioActivity.class));
+                    Toast.makeText(CadastroActivity.this,
+                           "Usuário cadastrado com sucesso!",
                            Toast.LENGTH_SHORT).show();
+
+                } else {
+
+                    String erroExcecao = "";
+
+                    try {
+                        throw task.getException();
+                    } catch (FirebaseAuthWeakPasswordException e){
+                        erroExcecao = "Digite uma senha mais forte!";
+                    } catch (FirebaseAuthInvalidCredentialsException e) {
+                        erroExcecao = "Por favor, digite um e-mail válido.";
+                    } catch (FirebaseAuthUserCollisionException e){
+                        erroExcecao = "Esta conta já foi cadastrada.";
+                    } catch (Exception e) {
+                        erroExcecao = "ao cadastrar usuário: " + e.getMessage();
+                        e.printStackTrace();
+                    }
+
+                    Toast.makeText(CadastroActivity.this,
+                            "Erro: " + erroExcecao,
+                            Toast.LENGTH_SHORT).show();
+
                 }
 
             }

@@ -262,12 +262,21 @@
                     android:textColorHint="@android:color/white" />
             </android.support.design.widget.TextInputLayout>
 
+            <ProgressBar
+                android:id="@+id/cadastro_ProgressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginTop="30dp" />
+
             <Button
                 android:id="@+id/cadastro_btnCadastrar"
                 style="@android:style/Widget.Holo.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/background_btn_entrar"
                 android:onClick="validarCadastroUsuario"
                 android:text="Cadastrar"

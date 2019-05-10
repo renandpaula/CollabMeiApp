@@ -1,5 +1,10 @@
 package br.edu.ucsal.colabmeiapp.model;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Exclude;
+
+import br.edu.ucsal.colabmeiapp.config.FirebaseConfig;
+
 public class Usuario {
 
     private String id;
@@ -12,6 +17,13 @@ public class Usuario {
     private String tipo;
 
     public Usuario() {
+    }
+
+    public void salvarNoBanco(){
+        DatabaseReference firebaseRef = FirebaseConfig.getFirebaseDatabase();
+        DatabaseReference usuarios = firebaseRef.child( "usuarios" ).child( getId() );
+
+        usuarios.setValue(this);
     }
 
     public String getId() {
@@ -62,6 +74,7 @@ public class Usuario {
         this.email = email;
     }
 
+    @Exclude
     public String getSenha() {
         return senha;
     }

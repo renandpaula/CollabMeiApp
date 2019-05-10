@@ -12,7 +12,7 @@ public class FirebaseConfig {
     private static FirebaseAuth referenciaAutenticacao;
     private static StorageReference referenciaStorage;
 
-    public static DatabaseReference getFirebase() {
+    public static DatabaseReference getFirebaseDatabase() {
 
         //Retornar a referencia do Database
         if (referenciaFirebase == null) {
