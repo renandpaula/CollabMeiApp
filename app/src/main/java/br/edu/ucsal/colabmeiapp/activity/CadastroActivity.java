@@ -7,7 +7,6 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.Switch;
@@ -206,7 +205,7 @@ public class CadastroActivity extends AppCompatActivity {
                     finish();
 
                     //Redireciona o usuario a pagina principal
-                    startActivity(new Intent(getApplicationContext(), InicioActivity.class));
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                     Toast.makeText(CadastroActivity.this,
                            "Usuário cadastrado com sucesso!",
                            Toast.LENGTH_SHORT).show();
