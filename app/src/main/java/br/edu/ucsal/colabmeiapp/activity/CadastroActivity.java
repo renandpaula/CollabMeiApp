@@ -231,6 +231,7 @@ public class CadastroActivity extends AppCompatActivity {
                     Toast.makeText(CadastroActivity.this,
                             "Erro: " + erroExcecao,
                             Toast.LENGTH_SHORT).show();
+                    loading.setVisibility(View.GONE);
 
                 }
 

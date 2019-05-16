@@ -13,7 +13,7 @@ public class Usuario {
     private String endereco;
     private String telefone;
     private String email;
-    private String senha;
+    private String senha; 
     private String tipo;
 
     public Usuario() {
