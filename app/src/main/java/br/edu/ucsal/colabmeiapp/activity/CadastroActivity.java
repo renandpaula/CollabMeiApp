@@ -19,14 +19,17 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
+import com.santalu.maskedittext.MaskEditText;
 
 import br.edu.ucsal.colabmeiapp.R;
 import br.edu.ucsal.colabmeiapp.config.FirebaseConfig;
+import br.edu.ucsal.colabmeiapp.helper.CpfCnpjUtils;
 import br.edu.ucsal.colabmeiapp.model.Usuario;
 
 public class CadastroActivity extends AppCompatActivity {
 
-    private TextInputEditText campoNome, campoRazao, campoCPF, campoCNPJ, campoTelefone, campoEndereco, campoEmail, campoSenha, campoConfirmaSenha;
+    private TextInputEditText campoNome, campoRazao, campoEndereco, campoEmail, campoSenha, campoConfirmaSenha;
+    private MaskEditText campoCPF, campoCNPJ, campoTelefone;
     private Switch switchTipoUsuario;
     private ProgressBar loading;
 
@@ -67,11 +70,13 @@ public class CadastroActivity extends AppCompatActivity {
                     layoutRazao.setVisibility(View.VISIBLE);
                     layoutCPF.setVisibility(View.GONE);
                     layoutCNPJ.setVisibility(View.VISIBLE);
+                    campoRazao.requestFocus();
                 } else {
                     layoutNome.setVisibility(View.VISIBLE);
                     layoutRazao.setVisibility(View.GONE);
                     layoutCPF.setVisibility(View.VISIBLE);
                     layoutCNPJ.setVisibility(View.GONE);
+                    campoNome.requestFocus();
                 }
             }
         });
@@ -85,15 +90,17 @@ public class CadastroActivity extends AppCompatActivity {
             //Recuperar textos digitados pelo usuario
             String textoNome = campoNome.getText().toString();
             String textoRazao = campoRazao.getText().toString();
-            String textoCPF = campoCPF.getText().toString();
-            String textoCNPJ = campoCNPJ.getText().toString();
+            String textoCPF = campoCPF.getRawText();
+            String textoCNPJ = campoCNPJ.getRawText();
             String textoEndereco = campoEndereco.getText().toString();
-            String textoTelefone = campoTelefone.getText().toString();
+            String textoTelefone = campoTelefone.getRawText();
             String textoEmail = campoEmail.getText().toString();
             String textoSenha = campoSenha.getText().toString();
             String textoConfirmaSenha = campoConfirmaSenha.getText().toString();
-            String pessoaJuridica = "Pessoa Jurídica";
-            String pessoaFisica = "Pessoa Física";
+            String pessoaJuridica = "PJ";
+            String pessoaFisica = "PF";
+
+
 
             //Verifica se o cadastro é de pessoa juridica
             if (switchTipoUsuario.isChecked()) {
@@ -141,15 +148,36 @@ public class CadastroActivity extends AppCompatActivity {
                                     if(switchTipoUsuario.isChecked()){ //Usuario tipo PJ
                                         usuario.setTipo(pessoaJuridica);
                                         usuario.setNomeXrazao(textoRazao);
-                                        usuario.setCpfXcnpj(textoCNPJ);
+                                        boolean cnpjValido = CpfCnpjUtils.isValid(textoCNPJ); //verifica se o cnpj digitado é valido
+
+                                        if (cnpjValido){
+                                            usuario.setCpfXcnpj(textoCNPJ);
+                                            loading.setVisibility(View.VISIBLE);
+                                            cadastrarUsuario(usuario);
+                                        } else {
+                                            campoCNPJ.requestFocus();
+                                            Toast.makeText(CadastroActivity.this,
+                                                    "CNPJ Inválido!",
+                                                    Toast.LENGTH_SHORT).show();
+                                        }
+
                                     } else { //Usuario tipo PF
                                         usuario.setTipo(pessoaFisica);
                                         usuario.setNomeXrazao(textoNome);
-                                        usuario.setCpfXcnpj(textoCPF);
+                                        boolean cpfValido = CpfCnpjUtils.isValid(textoCPF);  //verifica se o cpf digitado é valido
+
+                                        if (cpfValido){
+                                            usuario.setCpfXcnpj(textoCPF);
+                                            loading.setVisibility(View.VISIBLE);
+                                            cadastrarUsuario(usuario);
+                                        } else {
+                                            campoCPF.requestFocus();
+                                            Toast.makeText(CadastroActivity.this,
+                                                    "CPF Inválido!",
+                                                    Toast.LENGTH_SHORT).show();
+                                        }
                                     }
 
-                                    loading.setVisibility(View.VISIBLE);
-                                    cadastrarUsuario(usuario);
                                 }else{
                                     Toast.makeText(CadastroActivity.this,
                                             "As senhas não coincidem!",

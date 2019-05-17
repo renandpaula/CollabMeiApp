@@ -130,16 +130,17 @@
                 tools:layout_editor_absoluteX="5dp"
                 tools:layout_editor_absoluteY="102dp">
 
-                <com.vicmikhailau.maskededittext.MaskedEditText
+                <com.santalu.maskedittext.MaskEditText
                     android:id="@+id/cadastro_TextCPF"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    app:mask="###.###.###-##"
                     android:hint="CPF"
                     android:inputType="number"
+                    app:met_mask="###.###.###-##"
                     android:textColor="@android:color/white"
                     android:textColorHint="@android:color/white" />
+
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -153,16 +154,17 @@
                 tools:layout_editor_absoluteX="5dp"
                 tools:layout_editor_absoluteY="102dp">
 
-                <com.vicmikhailau.maskededittext.MaskedEditText
+                <com.santalu.maskedittext.MaskEditText
                     android:id="@+id/cadastro_TextCNPJ"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:mask="##.###.###/####-##"
                     android:layout_marginTop="5dp"
                     android:hint="CNPJ"
+                    app:met_mask="##.###.###/####-##"
                     android:inputType="number"
                     android:textColor="@android:color/white"
                     android:textColorHint="@android:color/white" />
+
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -175,15 +177,16 @@
                 tools:layout_editor_absoluteX="5dp"
                 tools:layout_editor_absoluteY="179dp">
 
-                <com.vicmikhailau.maskededittext.MaskedEditText
+                <com.santalu.maskedittext.MaskEditText
                     android:id="@+id/cadastro_TextTelefone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:mask="(##)######-####"
+                    app:met_mask="(##)#####-####"
                     android:hint="Telefone"
-                    android:inputType="number"
+                    android:inputType="phone"
                     android:textColor="@android:color/white"
                     android:textColorHint="@android:color/white" />
+
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
