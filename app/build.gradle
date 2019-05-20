@@ -37,6 +37,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.github.santalu:mask-edittext:1.0.7'
     implementation 'com.github.BlacKCaT27:CurrencyEditText:2.0.2'
+    implementation 'com.github.Mariovc:ImagePicker:1.2.2'
 
     /* Dependência firebase */
     implementation 'com.google.firebase:firebase-core:16.0.9'

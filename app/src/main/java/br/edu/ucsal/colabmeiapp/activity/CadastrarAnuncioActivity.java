@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -18,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.blackcat.currencyedittext.CurrencyEditText;
+import com.mvc.imagepicker.ImagePicker;
 import com.santalu.maskedittext.MaskEditText;
 
 import java.util.ArrayList;
@@ -50,6 +52,7 @@ public class CadastrarAnuncioActivity extends AppCompatActivity
 
         //Validar permissões
         Permissoes.validarPermissoes(permissoes, this, 1);
+        ImagePicker.setMinQuality(600,600);
 
         inicializarComponentes();
     }
@@ -60,44 +63,62 @@ public class CadastrarAnuncioActivity extends AppCompatActivity
         switch (v.getId()) {
 
             case R.id.cadastroAnuncio_imageView1 :
-                escolherImagem(1, 1);
-
+                ImagePicker.pickImage(this, "Selecione a imagem", 1, false);
                 break;
 
             case R.id.cadastroAnuncio_imageView2 :
-                escolherImagem(2,1);
-
+                ImagePicker.pickImage(this, "Selecione a imagem", 2, false);
                 break;
 
             case R.id.cadastroAnuncio_imageView3 :
-                escolherImagem(3,1);
-
+                ImagePicker.pickImage(this, "Selecione a imagem", 3, false);
                 break;
         }
 
     }
 
-    public void escolherImagem(int requestCode, int tipoRecurso){
-        switch (tipoRecurso) {
-
-            case 1 : //Uso recurso da galeria
-                Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(i, requestCode);
-                break;
+//    public void escolherImagem(int requestCode, int tipoRecurso){
+//        switch (tipoRecurso) {
 //
-            case 2 : //Uso recurso da camera
-                Intent e = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(e, requestCode);
+//            case 1 : //Uso recurso da galeria
+//                Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                startActivityForResult(i, requestCode);
+//                break;
+////
+//            case 2 : //Uso recurso da camera
+//                Intent e = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                startActivityForResult(e, requestCode);
+//                break;
+//        }
+//
+//
+//
+//    }
+
+    public void onPickImage(View v) {
+        // Click on image button
+
+        switch (v.getId()) {
+
+            case R.id.cadastroAnuncio_imageView1 :
+                ImagePicker.pickImage(this, "Selecione a imagem", 1, false);
+                break;
+
+            case R.id.cadastroAnuncio_imageView2 :
+                ImagePicker.pickImage(this, "Selecione a imagem", 2, false);
+                break;
+
+            case R.id.cadastroAnuncio_imageView3 :
+                ImagePicker.pickImage(this, "Selecione a imagem", 3, false);
                 break;
         }
-
-
-
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        Bitmap bitmap = ImagePicker.getImageFromResult(this, requestCode, resultCode, data);
 
         if ( resultCode == Activity.RESULT_OK){
 
