@@ -9,7 +9,6 @@
 
     <!--Permissões de Galeria e Câmera-->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
 
     <uses-feature
         android:name="android.hardware.camera2"
@@ -37,7 +36,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.edu.ucsal.colabmeiapp.activity.MainActivity" />
         </activity>
-        <activity android:name=".activity.MainActivity"
+        <activity android:name=".activity.LoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -50,7 +49,7 @@
             android:label="@string/titulo_telaCadastro"
             android:screenOrientation="portrait"
             android:parentActivityName=".activity.LoginActivity" />
-        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.MainActivity" />
     </application>
 
 </manifest>

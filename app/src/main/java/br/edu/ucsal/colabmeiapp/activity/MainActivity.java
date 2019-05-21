@@ -30,23 +30,13 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-
-        if (autenticacao.getCurrentUser() == null ){  //usuario deslogado
-            menu.setGroupVisible(R.id.group_deslogado, true);
-        } else { //usuario logado
-            menu.setGroupVisible(R.id.group_logado, true);
-        }
-        return super.onPrepareOptionsMenu(menu);
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId() ) {
-            case R.id.menu_cadastrar :
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                break;
+//            case R.id.menu_configuraçoes :
+//                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+//                break;
             case R.id.menu_sair :
                 autenticacao.signOut();
                 invalidateOptionsMenu();
