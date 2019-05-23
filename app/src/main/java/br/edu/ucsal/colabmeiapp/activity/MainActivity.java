@@ -34,12 +34,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId() ) {
-//            case R.id.menu_configuraçoes :
+//            case R.id.menu_perfil :
 //                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
 //                break;
             case R.id.menu_sair :
                 autenticacao.signOut();
-                invalidateOptionsMenu();
+                finish();
                 Toast.makeText(MainActivity.this,
                         "Usuario deslogado com sucesso!",
                         Toast.LENGTH_SHORT).show();

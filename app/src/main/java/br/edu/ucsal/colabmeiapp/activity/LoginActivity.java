@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseUser;
 
 import br.edu.ucsal.colabmeiapp.R;
 import br.edu.ucsal.colabmeiapp.config.FirebaseConfig;
@@ -27,9 +28,16 @@ public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth autenticacao;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
+
+
+
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
 
@@ -56,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                 if (task.isSuccessful()){
                                     loading.setVisibility(View.GONE);
-                                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                    abrirTelaPrincipal();
                                     Toast.makeText(LoginActivity.this,
                                             "Usuario logado com sucesso!",
                                             Toast.LENGTH_SHORT).show();
@@ -107,5 +115,18 @@ public class LoginActivity extends AppCompatActivity {
 
     public void abrirTelaCadastro(View view){
         startActivity(new Intent(this, CadastroActivity.class));
+    }
+
+    public void abrirTelaPrincipal(){
+        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser usuarioAtual = autenticacao.getCurrentUser();
+        if (usuarioAtual != null ){
+            abrirTelaPrincipal();
+        }
     }
 }
