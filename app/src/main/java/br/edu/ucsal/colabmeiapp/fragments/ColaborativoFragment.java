@@ -140,7 +140,7 @@ public class ColaborativoFragment extends Fragment {
 
         //configurar spinner do dialog
         View viewSpinner =  getLayoutInflater().inflate(R.layout.dialog_spinner, null);
-        Spinner spinnerCategoria = viewSpinner.findViewById(R.id.spinnerFiltro);
+        final Spinner spinnerCategoria = viewSpinner.findViewById(R.id.spinnerFiltro);
         String[] categorias = getResources().getStringArray(R.array.categorias);
         ArrayAdapter<String> adapterR = new ArrayAdapter<String>(
                 getActivity(), android.R.layout.simple_spinner_item,
@@ -154,9 +154,8 @@ public class ColaborativoFragment extends Fragment {
         dialogCategoria.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
-
-
+                filtroCategoria = spinnerCategoria.getSelectedItem().toString();
+                recuperarAnunciosPorCategoria();
             }
         });
 
@@ -223,6 +222,45 @@ public class ColaborativoFragment extends Fragment {
         anunciosPublicosRef = FirebaseConfig.getFirebaseDatabase()
                 .child("anuncios")
                 .child(filtroRegiao);
+        anunciosPublicosRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                listaAnuncios.clear();
+
+                for (DataSnapshot categorias : dataSnapshot.getChildren()){
+                    for (DataSnapshot anuncios : categorias.getChildren()){
+                        Anuncio anuncio = anuncios.getValue(Anuncio.class);
+                        listaAnuncios.add(anuncio);
+                    }
+
+                }
+                Collections.reverse(listaAnuncios);
+                adapterAnuncios.notifyDataSetChanged();
+                dialog.dismiss();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    public void recuperarAnunciosPorCategoria(){
+
+        dialog = new SpotsDialog.Builder()
+                .setContext(getActivity())
+                .setMessage("Carregando Anúncios")
+                .setCancelable(false)
+                .build();
+        dialog.show();
+
+        //configura nó por categoria
+        anunciosPublicosRef = FirebaseConfig.getFirebaseDatabase()
+                .child("anuncios")
+                .child(filtroCategoria);
         anunciosPublicosRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
