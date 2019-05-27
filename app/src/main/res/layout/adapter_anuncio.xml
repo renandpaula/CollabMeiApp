@@ -14,7 +14,7 @@
 
         <ImageView
             android:id="@+id/imageView_anuncio"
-            android:layout_width="150dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:scaleType="centerInside"
             app:srcCompat="@drawable/new_image_icon" />
