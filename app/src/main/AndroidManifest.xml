@@ -18,9 +18,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.ComercioActivity"></activity>
-        <activity android:name=".activity.CadastrarAnuncioActivity" />
+        tools:ignore="GoogleAppIndexingWarning"
+        >
+        <activity android:name=".activity.AnunciosDetalhesActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activity.MainActivity"/>
+
+        <activity android:name=".activity.ComercioActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".activity.CadastrarAnuncioActivity"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".activity.MeusAnunciosActivity"
             android:label="@string/title_activity_meus_anuncios"
@@ -45,7 +54,8 @@
             android:label="@string/titulo_telaCadastro"
             android:parentActivityName=".activity.LoginActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.MainActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

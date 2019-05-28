@@ -23,6 +23,8 @@ import android.widget.Toast;
 import com.blackcat.currencyedittext.CurrencyEditText;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.santalu.maskedittext.MaskEditText;
@@ -69,6 +71,8 @@ public class CadastrarAnuncioActivity extends AppCompatActivity
 
         inicializarComponentes();
         carregarDadosSpinner();
+
+
     }
 
     @Override

@@ -58,7 +58,10 @@ dependencies {
     //Dependencia SmartTabLayout
     implementation 'com.ogaclejapan.smarttablayout:library:1.7.0@aar'
     implementation 'com.ogaclejapan.smarttablayout:utils-v4:1.7.0@aar'
-  //  implementation 'com.ogaclejapan.smarttablayout:utils-v13:1.7.0@aar'
+    //  implementation 'com.ogaclejapan.smarttablayout:utils-v13:1.7.0@aar'
+
+    //Dependencia Carousel
+    implementation 'com.synnapps:carouselview:0.1.5'
 
 
 }

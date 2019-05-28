@@ -3,6 +3,7 @@ package br.edu.ucsal.colabmeiapp.fragments;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,9 +11,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,8 +29,12 @@ import java.util.Collections;
 import java.util.List;
 
 import br.edu.ucsal.colabmeiapp.R;
+import br.edu.ucsal.colabmeiapp.activity.AnunciosDetalhesActivity;
+import br.edu.ucsal.colabmeiapp.activity.LoginActivity;
+import br.edu.ucsal.colabmeiapp.activity.MainActivity;
 import br.edu.ucsal.colabmeiapp.adapter.AdapterAnuncios;
 import br.edu.ucsal.colabmeiapp.config.FirebaseConfig;
+import br.edu.ucsal.colabmeiapp.helper.RecyclerItemClickListener;
 import br.edu.ucsal.colabmeiapp.model.Anuncio;
 import dmax.dialog.SpotsDialog;
 
@@ -46,6 +53,7 @@ public class ColaborativoFragment extends Fragment {
     private String filtroRegiao = "";
     private String filtroCategoria = "";
     private boolean filtrandoPorRegiao = false;
+    private TextView limparFiltros;
 
 
     public ColaborativoFragment() {
@@ -64,6 +72,8 @@ public class ColaborativoFragment extends Fragment {
         autenticacao = FirebaseConfig.getFirebaseAutenticacao();
         recyclerAnunciosPublicos = view.findViewById(R.id.recyclerAnunciosPublicos);
         buttonCategoria =  view.findViewById(R.id.button_categoria);
+        limparFiltros =  view.findViewById(R.id.textView_LimparFiltros);
+        limparFiltros.setVisibility(View.GONE);
         buttonRegiao = view.findViewById(R.id.button_regiao);
         anunciosPublicosRef =  FirebaseConfig.getFirebaseDatabase()
                 .child("anuncios");
@@ -83,6 +93,14 @@ public class ColaborativoFragment extends Fragment {
             }
         });
 
+        limparFiltros.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), MainActivity.class));
+                getActivity().finish();
+            }
+        });
+
 
         //Config do recycler view
         recyclerAnunciosPublicos.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -91,6 +109,30 @@ public class ColaborativoFragment extends Fragment {
         recyclerAnunciosPublicos.setAdapter(adapterAnuncios);
 
         recuperarAnunciosPublicos();
+        recyclerAnunciosPublicos.addOnItemTouchListener(new RecyclerItemClickListener(
+                getActivity(),
+                recyclerAnunciosPublicos,
+                new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Anuncio anuncioSelecionado = listaAnuncios.get(position);
+                        Intent i = new Intent(getActivity(), AnunciosDetalhesActivity.class);
+                        i.putExtra("anuncioSelecionado", anuncioSelecionado);
+                        startActivity(i);
+
+                    }
+
+                    @Override
+                    public void onLongItemClick(View view, int position) {
+
+                    }
+
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    }
+                }
+        ));
 
         return view;
     }
@@ -120,11 +162,12 @@ public class ColaborativoFragment extends Fragment {
                 filtroRegiao = spinnerRegiao.getSelectedItem().toString();
                 recuperarAnunciosPorRegiao();
                 filtrandoPorRegiao =  true;
+                limparFiltros.setVisibility(View.VISIBLE);
 
             }
         });
 
-        dialogRegiao.setNegativeButton("Limpar", new DialogInterface.OnClickListener() {
+        dialogRegiao.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 

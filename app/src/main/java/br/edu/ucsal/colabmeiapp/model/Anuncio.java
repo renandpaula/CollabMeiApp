@@ -2,13 +2,15 @@ package br.edu.ucsal.colabmeiapp.model;
 
 import com.google.firebase.database.DatabaseReference;
 
+import java.io.Serializable;
 import java.util.List;
 
 import br.edu.ucsal.colabmeiapp.config.FirebaseConfig;
 
-public class Anuncio {
+public class Anuncio implements Serializable {
 
     private String idAnuncio;
+    private String idUsuario;
     private String regiao;
     private String categoria;
     private String cidade;
@@ -26,10 +28,13 @@ public class Anuncio {
     }
 
     public void salvar(){
-        String idUsuario = FirebaseConfig.getIdUsuario();
+
+        String idUsuarioLogado = FirebaseConfig.getIdUsuario();
+        setIdUsuario(idUsuarioLogado);
+
         DatabaseReference anuncioRef = FirebaseConfig.getFirebaseDatabase()
                 .child("meus anuncios");
-        anuncioRef.child(idUsuario)
+        anuncioRef.child(getIdUsuario())
                 .child(getIdAnuncio())
                 .setValue(this);
         salvarAnuncioPublico();
@@ -45,11 +50,11 @@ public class Anuncio {
     }
 
     public void remover(){
-
-        String idUsuario = FirebaseConfig.getIdUsuario();
+        String idUsuarioLogado = FirebaseConfig.getIdUsuario();
+        setIdUsuario(idUsuarioLogado);
         DatabaseReference anuncioRef = FirebaseConfig.getFirebaseDatabase()
                 .child("meus anuncios")
-                .child(idUsuario)
+                .child(getIdUsuario())
                 .child(getIdAnuncio());
         anuncioRef.removeValue();
         removerAnuncioPublico();
@@ -65,6 +70,14 @@ public class Anuncio {
                 .child(getIdAnuncio());
         anuncioRef.removeValue();
 
+    }
+
+    public String getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getIdAnuncio() {
