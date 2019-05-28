@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -44,6 +45,7 @@ public class ColaborativoFragment extends Fragment {
     private AlertDialog dialog;
     private String filtroRegiao = "";
     private String filtroCategoria = "";
+    private boolean filtrandoPorRegiao = false;
 
 
     public ColaborativoFragment() {
@@ -76,8 +78,8 @@ public class ColaborativoFragment extends Fragment {
 
         buttonCategoria.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                filtroPorCategoria(v);
+            public void onClick(View vi) {
+                filtroPorCategoria(vi);
             }
         });
 
@@ -117,6 +119,7 @@ public class ColaborativoFragment extends Fragment {
 
                 filtroRegiao = spinnerRegiao.getSelectedItem().toString();
                 recuperarAnunciosPorRegiao();
+                filtrandoPorRegiao =  true;
 
             }
         });
@@ -135,39 +138,47 @@ public class ColaborativoFragment extends Fragment {
 
     public void filtroPorCategoria(View view){
 
-        AlertDialog.Builder dialogCategoria = new AlertDialog.Builder(getActivity());
-        dialogCategoria.setTitle("Selecione a categoria desejada");
+        if (filtrandoPorRegiao == true){
 
-        //configurar spinner do dialog
-        View viewSpinner =  getLayoutInflater().inflate(R.layout.dialog_spinner, null);
-        final Spinner spinnerCategoria = viewSpinner.findViewById(R.id.spinnerFiltro);
-        String[] categorias = getResources().getStringArray(R.array.categorias);
-        ArrayAdapter<String> adapterR = new ArrayAdapter<String>(
-                getActivity(), android.R.layout.simple_spinner_item,
-                categorias
-        );
-        adapterR.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerCategoria.setAdapter(adapterR);
+            AlertDialog.Builder dialogCategoria = new AlertDialog.Builder(getActivity());
+            dialogCategoria.setTitle("Selecione a categoria desejada");
 
-        dialogCategoria.setView(viewSpinner);
+            //configurar spinner do dialog
+            View viewSpinner =  getLayoutInflater().inflate(R.layout.dialog_spinner, null);
+            final Spinner spinnerCategoria = viewSpinner.findViewById(R.id.spinnerFiltro);
+            String[] categorias = getResources().getStringArray(R.array.categorias);
+            ArrayAdapter<String> adapterR = new ArrayAdapter<String>(
+                    getActivity(), android.R.layout.simple_spinner_item,
+                    categorias
+            );
+            adapterR.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinnerCategoria.setAdapter(adapterR);
 
-        dialogCategoria.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                filtroCategoria = spinnerCategoria.getSelectedItem().toString();
-                recuperarAnunciosPorCategoria();
-            }
-        });
+            dialogCategoria.setView(viewSpinner);
 
-        dialogCategoria.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+            dialogCategoria.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    filtroCategoria = spinnerCategoria.getSelectedItem().toString();
+                    recuperarAnunciosPorCategoria();
+                }
+            });
 
-            }
-        });
+            dialogCategoria.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
 
-        AlertDialog dialog = dialogCategoria.create();
-        dialog.show();
+                }
+            });
+
+            AlertDialog dialog = dialogCategoria.create();
+            dialog.show();
+
+        } else {
+            Toast.makeText(getActivity(), "Escolha primeiro uma região!", Toast.LENGTH_SHORT).show();
+        }
+
+
 
     }
 
@@ -260,20 +271,20 @@ public class ColaborativoFragment extends Fragment {
         //configura nó por categoria
         anunciosPublicosRef = FirebaseConfig.getFirebaseDatabase()
                 .child("anuncios")
+                .child(filtroCategoria)
                 .child(filtroCategoria);
+
         anunciosPublicosRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 listaAnuncios.clear();
 
-                for (DataSnapshot categorias : dataSnapshot.getChildren()){
-                    for (DataSnapshot anuncios : categorias.getChildren()){
+                    for (DataSnapshot anuncios : dataSnapshot.getChildren()){
                         Anuncio anuncio = anuncios.getValue(Anuncio.class);
                         listaAnuncios.add(anuncio);
                     }
 
-                }
                 Collections.reverse(listaAnuncios);
                 adapterAnuncios.notifyDataSetChanged();
                 dialog.dismiss();
