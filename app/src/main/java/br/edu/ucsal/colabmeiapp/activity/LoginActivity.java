@@ -36,11 +36,7 @@ public class LoginActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-
-
-
         setContentView(R.layout.activity_login);
-        getSupportActionBar().hide();
 
         inicializaComponentes();
         loading.setVisibility(View.GONE);
@@ -119,7 +115,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void abrirTelaPrincipal(){
-        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        startActivity(new Intent(LoginActivity.this, PrincipalActivity.class));
         finish();
     }
 

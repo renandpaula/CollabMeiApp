@@ -2,16 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <item android:id="@+id/menu_social"
-                    android:title="Rede Social"
+        <item android:id="@+id/meus_anuncios"
+                    android:title="Meus Anúncios"
                     app:showAsAction="always"
-                    android:icon="@drawable/ic_people_branco" />
+                    android:icon="@drawable/ic_meus_anuncios_azul" />
 
         <item android:id="@+id/menu_perfil"
-            android:title="Perfil" />
+            android:title="Editar perfil" />
 
         <item android:id="@+id/menu_sair"
-            android:title="Sair" />
+            android:title="Deslogar" />
 
 
 </menu>

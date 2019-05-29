@@ -30,7 +30,7 @@ public class AnunciosDetalhesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_anuncios_detalhes);
 
         //configurar toobar
-        getSupportActionBar().setTitle("Detalhes do Anúncio");
+//        getSupportActionBar().setTitle("Detalhes do Anúncio");
 
 
         //inicializar componentes da interface

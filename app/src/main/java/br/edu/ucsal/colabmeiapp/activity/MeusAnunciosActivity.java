@@ -49,8 +49,13 @@ public class MeusAnunciosActivity extends AppCompatActivity {
 
         inicializarComponentes();
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbarPrincipal);
+        toolbar.setTitle("Meus Anúncios");
+
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +65,6 @@ public class MeusAnunciosActivity extends AppCompatActivity {
 
             }
         });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Config do recycler view
         recyclerAnuncios.setLayoutManager(new LinearLayoutManager(this));

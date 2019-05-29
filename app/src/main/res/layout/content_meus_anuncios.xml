@@ -8,14 +8,11 @@
     tools:context=".activity.MeusAnunciosActivity"
     tools:showIn="@layout/activity_meus_anuncios">
 
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerAnuncios"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,17 +23,15 @@
     <ProgressBar
         android:id="@+id/progressBarAnuncios"
         style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="411dp"
+        android:layout_marginTop="658dp"
+        android:layout_marginEnd="411dp"
+        android:layout_marginBottom="659dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/recyclerAnuncios"
-        app:layout_constraintEnd_toEndOf="@+id/recyclerAnuncios"
-        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.506" />
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

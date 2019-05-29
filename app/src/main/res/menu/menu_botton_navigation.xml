@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/ic_home"
+        android:icon="@drawable/ic_home_azul"
+        android:title="Social" />
+
+    <item android:id="@+id/ic_pesquisa"
+        android:icon="@drawable/ic_search_azul"
+        android:title="Pesquisa" />
+
+    <item android:id="@+id/ic_postagem"
+        android:icon="@drawable/ic_add_post_azul"
+        android:title="Postar" />
+
+    <item android:id="@+id/ic_perfil"
+        android:icon="@drawable/ic_perfil_azul"
+        android:title="Perfil" />
+
+    <item android:id="@+id/ic_negocios"
+        android:icon="@drawable/ic_negocios_azul"
+        android:title="Comércio" />
+
+    <!--<item android:id="@+id/ic_meusAnuncios"-->
+        <!--android:icon="@drawable/ic_work_azul"-->
+        <!--android:title="Meus Anúncios" />-->
+
+</menu>
