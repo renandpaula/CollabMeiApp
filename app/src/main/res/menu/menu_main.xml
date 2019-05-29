@@ -4,7 +4,8 @@
 
         <item android:id="@+id/menu_social"
                     android:title="Rede Social"
-                    app:showAsAction="always"/>
+                    app:showAsAction="always"
+                    android:icon="@drawable/ic_people_branco" />
 
         <item android:id="@+id/menu_perfil"
             android:title="Perfil" />
