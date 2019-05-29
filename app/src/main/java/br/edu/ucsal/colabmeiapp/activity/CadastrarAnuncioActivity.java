@@ -63,6 +63,8 @@ public class CadastrarAnuncioActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastrar_anuncio);
 
+        getSupportActionBar().setTitle("Novo Anúncio");
+
         //Configurações iniciais
         storage = FirebaseConfig.getFirebaseStorage();
 

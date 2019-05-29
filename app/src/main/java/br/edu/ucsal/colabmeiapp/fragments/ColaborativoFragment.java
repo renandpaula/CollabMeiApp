@@ -314,7 +314,7 @@ public class ColaborativoFragment extends Fragment {
         //configura nó por categoria
         anunciosPublicosRef = FirebaseConfig.getFirebaseDatabase()
                 .child("anuncios")
-                .child(filtroCategoria)
+                .child(filtroRegiao)
                 .child(filtroCategoria);
 
         anunciosPublicosRef.addValueEventListener(new ValueEventListener() {

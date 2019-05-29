@@ -2,13 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <item android:id="@+id/menu_anuncios"
-            android:title="Meus anúncios" />
+        <item android:id="@+id/menu_social"
+                    android:title="Rede Social"
+                    app:showAsAction="always"/>
 
         <item android:id="@+id/menu_perfil"
             android:title="Perfil" />
 
         <item android:id="@+id/menu_sair"
             android:title="Sair" />
+
 
 </menu>

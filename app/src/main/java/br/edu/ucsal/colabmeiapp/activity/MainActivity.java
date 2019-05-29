@@ -16,6 +16,7 @@ import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 import br.edu.ucsal.colabmeiapp.R;
 import br.edu.ucsal.colabmeiapp.config.FirebaseConfig;
 import br.edu.ucsal.colabmeiapp.fragments.ColaborativoFragment;
+import br.edu.ucsal.colabmeiapp.fragments.MeusAnunciosFragment;
 import br.edu.ucsal.colabmeiapp.fragments.SocialFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
         FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(
           getSupportFragmentManager(),
                 FragmentPagerItems.with(this)
-                .add("Colaborativo", ColaborativoFragment.class)
-                .add("Social", SocialFragment.class)
+                .add("Comunidade", ColaborativoFragment.class)
+                .add("Meus Anúncios", MeusAnunciosFragment.class)
                 .create()
         );
         ViewPager viewPager = findViewById(R.id.viewPager);
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId() ) {
 //            case R.id.menu_perfil :
-//                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+//                startActivity(new Intent(getApplicationContext(), MeuPerfilActivity.class));
 //                break;
             case R.id.menu_sair :
                 autenticacao.signOut();
@@ -65,11 +66,9 @@ public class MainActivity extends AppCompatActivity {
                         "Usuario deslogado com sucesso!",
                         Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.menu_anuncios :
-                startActivity(new Intent(getApplicationContext(), MeusAnunciosActivity.class));
-                break;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
 }
