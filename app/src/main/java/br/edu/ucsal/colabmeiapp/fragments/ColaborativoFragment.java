@@ -32,6 +32,7 @@ import br.edu.ucsal.colabmeiapp.R;
 import br.edu.ucsal.colabmeiapp.activity.AnunciosDetalhesActivity;
 import br.edu.ucsal.colabmeiapp.activity.LoginActivity;
 import br.edu.ucsal.colabmeiapp.activity.MainActivity;
+import br.edu.ucsal.colabmeiapp.activity.PrincipalActivity;
 import br.edu.ucsal.colabmeiapp.adapter.AdapterAnuncios;
 import br.edu.ucsal.colabmeiapp.config.FirebaseConfig;
 import br.edu.ucsal.colabmeiapp.helper.RecyclerItemClickListener;
@@ -96,7 +97,7 @@ public class ColaborativoFragment extends Fragment {
         limparFiltros.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), MainActivity.class));
+                startActivity(new Intent(getActivity(), PrincipalActivity.class));
                 getActivity().finish();
             }
         });

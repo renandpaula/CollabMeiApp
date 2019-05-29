@@ -24,6 +24,7 @@ import com.santalu.maskedittext.MaskEditText;
 import br.edu.ucsal.colabmeiapp.R;
 import br.edu.ucsal.colabmeiapp.config.FirebaseConfig;
 import br.edu.ucsal.colabmeiapp.helper.CpfCnpjUtils;
+import br.edu.ucsal.colabmeiapp.helper.UsuarioFirebase;
 import br.edu.ucsal.colabmeiapp.model.Usuario;
 
 public class CadastroActivity extends AppCompatActivity {
@@ -41,13 +42,13 @@ public class CadastroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro);
 
         //Inicializa componentes
-        campoNome = findViewById(R.id.cadastro_TextNome);
-        campoRazao = findViewById(R.id.cadastro_TextRazaoSocial);
-        campoCPF = findViewById(R.id.cadastro_TextCPF);
-        campoCNPJ = findViewById(R.id.cadastro_TextCNPJ);
-        campoTelefone = findViewById(R.id.cadastro_TextTelefone);
-        campoEndereco = findViewById(R.id.cadastro_TextEndereco);
-        campoEmail = findViewById(R.id.cadastro_TextEmail);
+        campoNome = findViewById(R.id.edit_TextNome);
+        campoRazao = findViewById(R.id.edit_TextRazaoSocial);
+        campoCPF = findViewById(R.id.edit_TextCPF);
+        campoCNPJ = findViewById(R.id.edit_TextCNPJ);
+        campoTelefone = findViewById(R.id.edit_TextTelefone);
+        campoEndereco = findViewById(R.id.edit_TextEndereco);
+        campoEmail = findViewById(R.id.edit_TextEmail);
         campoSenha = findViewById(R.id.cadastro_TextSenha);
         campoConfirmaSenha = findViewById(R.id.cadastro_TextConfirmaSenha);
         switchTipoUsuario = findViewById(R.id.cadastro_switch);
@@ -230,6 +231,9 @@ public class CadastroActivity extends AppCompatActivity {
                     usuario.setId( idUsuario );
                     usuario.salvarNoBanco();
                     finish();
+
+                    //Salvar dados no profile
+                    UsuarioFirebase.atualizarNomeUsuario(usuario.getNomeXrazao());
 
                     //Redireciona o usuario a pagina principal
                     startActivity(new Intent(getApplicationContext(), LoginActivity.class));

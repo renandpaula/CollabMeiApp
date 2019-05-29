@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/ic_home"
-        android:icon="@drawable/ic_home_azul"
+        android:icon="@drawable/ic_onlylogo_colabmeipp_preenchido"
         android:title="Social" />
 
     <item android:id="@+id/ic_pesquisa"
@@ -12,15 +12,15 @@
 
     <item android:id="@+id/ic_postagem"
         android:icon="@drawable/ic_add_post_azul"
-        android:title="Postar" />
+        android:title="Publicar" />
 
     <item android:id="@+id/ic_perfil"
         android:icon="@drawable/ic_perfil_azul"
         android:title="Perfil" />
 
-    <item android:id="@+id/ic_negocios"
-        android:icon="@drawable/ic_negocios_azul"
-        android:title="Comércio" />
+    <item android:id="@+id/ic_comunidade"
+        android:icon="@drawable/ic_colaborativo_azul"
+        android:title="Comunidade" />
 
     <!--<item android:id="@+id/ic_meusAnuncios"-->
         <!--android:icon="@drawable/ic_work_azul"-->

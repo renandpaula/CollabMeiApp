@@ -15,6 +15,7 @@ public class Usuario {
     private String email;
     private String senha; 
     private String tipo;
+    private String caminhoFoto;
 
     public Usuario() {
     }
@@ -72,6 +73,14 @@ public class Usuario {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getCaminhoFoto() {
+        return caminhoFoto;
+    }
+
+    public void setCaminhoFoto(String caminhoFoto) {
+        this.caminhoFoto = caminhoFoto;
     }
 
     @Exclude

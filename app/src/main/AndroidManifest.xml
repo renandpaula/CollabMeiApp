@@ -20,8 +20,17 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".activity.PrincipalActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.EditarPerfilActivity"
+            android:parentActivityName=".activity.PrincipalActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.edu.ucsal.colabmeiapp.activity.PrincipalActivity" />
+        </activity>
+
+        <activity
+            android:name=".activity.PrincipalActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".activity.AnunciosDetalhesActivity"
@@ -30,7 +39,12 @@
 
         <activity
             android:name=".activity.CadastrarAnuncioActivity"
-            android:screenOrientation="portrait" />
+            android:parentActivityName=".activity.MeusAnunciosActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.edu.ucsal.colabmeiapp.activity.MeusAnunciosActivity" />
+        </activity>
 
         <activity
             android:name=".activity.MeusAnunciosActivity"
