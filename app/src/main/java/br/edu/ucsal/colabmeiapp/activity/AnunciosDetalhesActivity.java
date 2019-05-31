@@ -11,12 +11,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
 import br.edu.ucsal.colabmeiapp.R;
+import br.edu.ucsal.colabmeiapp.config.FirebaseConfig;
 import br.edu.ucsal.colabmeiapp.model.Anuncio;
+import br.edu.ucsal.colabmeiapp.model.Usuario;
 
 public class AnunciosDetalhesActivity extends AppCompatActivity {
 
@@ -24,13 +31,14 @@ public class AnunciosDetalhesActivity extends AppCompatActivity {
     private CarouselView carouselView;
     private String idUsuario;
     private Anuncio anuncioSelecionado;
+    private DatabaseReference usuarioRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anuncios_detalhes);
 
-        //configurar toobar
+        //configurar toolbar
         Toolbar toolbar = findViewById(R.id.toolbarPrincipal);
         toolbar.setTitle("Detalhes do anúncio:");
         setSupportActionBar(toolbar);
@@ -42,6 +50,8 @@ public class AnunciosDetalhesActivity extends AppCompatActivity {
 
         //inicializar componentes da interface
         inicializarComponentes();
+        usuarioRef =  FirebaseConfig.getFirebaseDatabase()
+                .child("usuarios");
 
         //Recupera anuncio para exibicao
         anuncioSelecionado =  (Anuncio) getIntent().getSerializableExtra("anuncioSelecionado");
@@ -68,11 +78,17 @@ public class AnunciosDetalhesActivity extends AppCompatActivity {
             carouselView.setImageListener(imageListener);
             Log.i("INFO", "ID do Usuario: "+ idUsuario);
         }
+
+
     }
 
     public void visualizarTelefone(View view){
         Intent i = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", anuncioSelecionado.getTelefone(), null));
         startActivity(i);
+    }
+
+    public void abrePerfilId(View view){
+        recuperaPorId(idUsuario);
     }
 
     private void inicializarComponentes(){
@@ -85,6 +101,37 @@ public class AnunciosDetalhesActivity extends AppCompatActivity {
         campoPreco = findViewById(R.id.detalhes_textView_Preco);
         campoCategoria = findViewById(R.id.detalhes_textView_Categoria);
 
+    }
+
+    private void recuperaPorId(final String idUsuarioAnuncio) {
+
+        Query query = usuarioRef.orderByChild("id")
+                .startAt(idUsuarioAnuncio);
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    if (ds.child("id").getValue().toString().equals(idUsuarioAnuncio)) {
+                        Usuario recuperado = ds.getValue(Usuario.class);
+                        onUsuarioRecuperado(recuperado);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void onUsuarioRecuperado(Usuario recuperado){
+        Usuario usuario = recuperado;
+        Intent i = new Intent(AnunciosDetalhesActivity.this, PerfilAmigoActivity.class);
+        i.putExtra("usuarioSelecionado", usuario);
+        startActivity(i);
     }
 
     @Override

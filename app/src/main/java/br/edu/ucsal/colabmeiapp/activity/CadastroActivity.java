@@ -212,7 +212,7 @@ public class CadastroActivity extends AppCompatActivity {
 
         }
 
-    public void cadastrarUsuario (final Usuario usuario){
+    public void cadastrarUsuario ( final Usuario usuario){
 
         autenticacao = FirebaseConfig.getFirebaseAutenticacao();
         autenticacao.createUserWithEmailAndPassword(
@@ -230,7 +230,7 @@ public class CadastroActivity extends AppCompatActivity {
                     String idUsuario = task.getResult().getUser().getUid();
                     usuario.setId( idUsuario );
                     usuario.salvarNoBanco();
-                    finish();
+
 
                     //Salvar dados no profile
                     UsuarioFirebase.atualizarNomeUsuario(usuario.getNomeXrazao());
@@ -240,6 +240,7 @@ public class CadastroActivity extends AppCompatActivity {
                     Toast.makeText(CadastroActivity.this,
                            "Usuário cadastrado com sucesso!",
                            Toast.LENGTH_SHORT).show();
+                    finish();
 
                 } else {
 

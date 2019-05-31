@@ -1,5 +1,6 @@
 package br.edu.ucsal.colabmeiapp.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -37,6 +38,7 @@ import java.io.ByteArrayOutputStream;
 import br.edu.ucsal.colabmeiapp.R;
 import br.edu.ucsal.colabmeiapp.config.FirebaseConfig;
 import br.edu.ucsal.colabmeiapp.helper.CpfCnpjUtils;
+import br.edu.ucsal.colabmeiapp.helper.Permissoes;
 import br.edu.ucsal.colabmeiapp.helper.UsuarioFirebase;
 import br.edu.ucsal.colabmeiapp.model.Usuario;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -58,19 +60,26 @@ public class EditarPerfilActivity extends AppCompatActivity {
     String pessoaJuridica = "PJ";
     String pessoaFisica = "PF";
 
+    private String[] permissoes =  new String[]{
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA  };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_perfil);
 
+        //validar permissoes
+        Permissoes.validarPermissoes(permissoes, this, 1);
+
         usuarioLogado = UsuarioFirebase.getDadosUsuariologado();
         storageRef = FirebaseConfig.getFirebaseStorage();
         identificadorUsuario = FirebaseConfig.getIdUsuario();
 
+        //configura toolbar
         Toolbar toolbar = findViewById(R.id.toolbarPrincipal);
         toolbar.setTitle("Editar Perfil:");
         setSupportActionBar(toolbar);
-
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_azul);
@@ -82,7 +91,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
 
         //recuperar dados do usuario
         recuperaPorId(identificadorUsuario);
-        final FirebaseUser usuarioPerfil = FirebaseConfig.getUsuarioAtual();
+        FirebaseUser usuarioPerfil = FirebaseConfig.getUsuarioAtual();
 
         Uri url = usuarioPerfil.getPhotoUrl();
         if(url != null){
@@ -123,11 +132,11 @@ public class EditarPerfilActivity extends AppCompatActivity {
 
                         //Atualizar nome no banco
                         usuarioLogado.atualizar();
-                        finish();
+
                         Toast.makeText(EditarPerfilActivity.this,
                                 "Dados atualizados com sucesso!",
                                 Toast.LENGTH_SHORT).show();
-//                        loading.setVisibility(View.VISIBLE);
+                        finish();
                     } else {
                         campoCNPJ.requestFocus();
                         Toast.makeText(EditarPerfilActivity.this,
@@ -148,11 +157,11 @@ public class EditarPerfilActivity extends AppCompatActivity {
 
                         //Atualizar nome no banco
                         usuarioLogado.atualizar();
-                        finish();
+
                         Toast.makeText(EditarPerfilActivity.this,
                                 "Dados atualizados com sucesso!",
                                 Toast.LENGTH_SHORT).show();
-//                        loading.setVisibility(View.VISIBLE);
+                        finish();
                     } else {
                         campoCPF.requestFocus();
                         Toast.makeText(EditarPerfilActivity.this,

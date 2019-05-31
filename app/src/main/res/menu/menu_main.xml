@@ -7,9 +7,6 @@
                     app:showAsAction="always"
                     android:icon="@drawable/ic_meus_anuncios_azul" />
 
-        <item android:id="@+id/menu_perfil"
-            android:title="Editar perfil" />
-
         <item android:id="@+id/menu_sair"
             android:title="Deslogar" />
 

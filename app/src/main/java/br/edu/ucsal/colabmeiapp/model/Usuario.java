@@ -20,6 +20,10 @@ public class Usuario implements Serializable {
     private String senha; 
     private String tipo;
     private String caminhoFoto;
+    private int seguidores = 0;
+    private int seguindo = 0;
+    private int postagens = 0;
+
 
     public Usuario() {
     }
@@ -55,14 +59,55 @@ public class Usuario implements Serializable {
         HashMap<String, Object> usuarioMap = new HashMap<>();
         usuarioMap.put("email", getEmail());
         usuarioMap.put("nomeXrazao", getNomeXrazao());
+        usuarioMap.put("nome", getNomeXrazao());
         usuarioMap.put("cpfXcnpj", getCpfXcnpj());
         usuarioMap.put("endereco", getEndereco());
         usuarioMap.put("telefone", getTelefone());
         usuarioMap.put("tipo", getTipo());
         usuarioMap.put("id", getId());
         usuarioMap.put("caminhoFoto", getCaminhoFoto());
+        usuarioMap.put("seguidores", getSeguidores());
+        usuarioMap.put("seguindo", getSeguindo());
+        usuarioMap.put("postagens", getPostagens());
         return usuarioMap;
     }
+
+    public void atualizarQtdPostagens(){
+        DatabaseReference firebaseRef =  FirebaseConfig.getFirebaseDatabase();
+        DatabaseReference usuarioRef =  firebaseRef
+                .child("usuarios")
+                .child(getId());
+
+        HashMap<String, Object> dados = new HashMap<>();
+        dados.put("postagens", getPostagens());
+
+        usuarioRef.updateChildren(dados);
+    }
+
+    public int getSeguidores() {
+        return seguidores;
+    }
+
+    public void setSeguidores(int seguidores) {
+        this.seguidores = seguidores;
+    }
+
+    public int getSeguindo() {
+        return seguindo;
+    }
+
+    public void setSeguindo(int seguindo) {
+        this.seguindo = seguindo;
+    }
+
+    public int getPostagens() {
+        return postagens;
+    }
+
+    public void setPostagens(int postagens) {
+        this.postagens = postagens;
+    }
+
     public String getId() {
         return id;
     }

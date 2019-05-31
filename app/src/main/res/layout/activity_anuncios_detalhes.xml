@@ -139,6 +139,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/background_btn_entrar"
+                android:onClick="abrePerfilId"
                 android:text="VER PERFIL" />
         </LinearLayout>
 

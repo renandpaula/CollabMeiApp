@@ -54,7 +54,7 @@ public class CadastrarAnuncioActivity extends AppCompatActivity
 
     private String[] permissoes =  new String[]{
             Manifest.permission.READ_EXTERNAL_STORAGE,
-    };
+            Manifest.permission.CAMERA  };
 
     private List<String> listaFotosRecuperadas = new ArrayList<>();
     private List<String> listaURLFotos = new ArrayList<>();
@@ -63,6 +63,9 @@ public class CadastrarAnuncioActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastrar_anuncio);
+
+        //validar permissoes
+        Permissoes.validarPermissoes(permissoes, this, 1);
 
         Toolbar toolbar = findViewById(R.id.toolbarPrincipal);
         toolbar.setTitle("Novo Anúncio:");

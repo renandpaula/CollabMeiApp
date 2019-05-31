@@ -2,14 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="br.edu.ucsal.colabmeiapp">
-    <!-- Permissões Internet -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Permissões de Galeria e Câmera -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <uses-feature
         android:name="android.hardware.camera2"
-        android:required="true" />
+        android:required="true" /> <!-- Permissões Internet -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Permissões de Galeria e Câmera -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -19,7 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.PerfilAmigoActivity"></activity>
+        <activity android:name=".activity.VisualizarPublicacaoActivity"></activity>
+        <activity android:name=".activity.FiltroActivity" />
+        <activity android:name=".activity.PerfilAmigoActivity" />
         <activity
             android:name=".activity.EditarPerfilActivity"
             android:parentActivityName=".activity.PrincipalActivity"

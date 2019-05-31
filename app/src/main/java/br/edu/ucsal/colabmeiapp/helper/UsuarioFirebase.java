@@ -15,21 +15,27 @@ import br.edu.ucsal.colabmeiapp.model.Usuario;
 
 public class UsuarioFirebase {
 
+    public static  FirebaseUser getUsuarioLogado(){
+        FirebaseAuth usuario = FirebaseConfig.getFirebaseAutenticacao();
+        return usuario.getCurrentUser();
+    }
+
+
 
     public static void atualizarNomeUsuario(String nome){
+
 
         try {
 
             //usuario logado
-            FirebaseUser usuarioLogado = FirebaseConfig.getUsuarioAtual();
+            FirebaseUser usuarioLogado = getUsuarioLogado();
 
             //configura objeto para alterar perfil
             UserProfileChangeRequest profile =  new UserProfileChangeRequest
                     .Builder()
                     .setDisplayName(nome)
                     .build();
-
-            usuarioLogado.updateProfile(profile).addOnCompleteListener(new OnCompleteListener<Void>() {
+            usuarioLogado.updateProfile( profile ).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (!task.isSuccessful()){

@@ -37,7 +37,7 @@ public class PesquisaFragment extends Fragment {
     //widget
     private SearchView searchViewPesquisa;
     private RecyclerView recyclerViewPesquisa;
-
+    private String idUsuarioLogado;
     private List<Usuario> listaUsuarios;
     private DatabaseReference usuariosRef;
     private AdapterPesquisa adapterPesquisa;
@@ -60,6 +60,7 @@ public class PesquisaFragment extends Fragment {
 
         //configs iniciais
         listaUsuarios =  new ArrayList<>();
+        idUsuarioLogado = FirebaseConfig.getIdUsuario();
         usuariosRef = FirebaseConfig.getFirebaseDatabase()
                 .child("usuarios");
 
@@ -133,12 +134,16 @@ public class PesquisaFragment extends Fragment {
                     listaUsuarios.clear();
 
                     for (DataSnapshot ds : dataSnapshot.getChildren()){
-                        listaUsuarios.add(ds.getValue(Usuario.class));
+
+                        //verifica se eh o usuario logado
+                        Usuario usuario = ds.getValue(Usuario.class);
+                        if (idUsuarioLogado.equals(usuario.getId())){
+                            continue;
+                        }
+                        listaUsuarios.add(usuario);
                     }
 
                     adapterPesquisa.notifyDataSetChanged();
-//                    int total = listaUsuarios.size();
-//                    Log.i("totalUsuarios", "total: " + total);
                 }
 
 
