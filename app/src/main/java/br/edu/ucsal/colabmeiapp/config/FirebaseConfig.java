@@ -1,6 +1,7 @@
 package br.edu.ucsal.colabmeiapp.config;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -15,6 +16,11 @@ public class FirebaseConfig {
     public static String getIdUsuario(){
         FirebaseAuth autenticacao = getFirebaseAutenticacao();
         return autenticacao.getCurrentUser().getUid();
+    }
+
+    public static FirebaseUser getUsuarioAtual() {
+        FirebaseAuth usuario = FirebaseConfig.getFirebaseAutenticacao();
+        return usuario.getCurrentUser();
     }
 
     public static DatabaseReference getFirebaseDatabase() {

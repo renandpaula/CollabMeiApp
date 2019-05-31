@@ -54,10 +54,10 @@ public class CadastroActivity extends AppCompatActivity {
         switchTipoUsuario = findViewById(R.id.cadastro_switch);
         loading = findViewById(R.id.cadastro_ProgressBar);
 
-        final TextInputLayout layoutNome = findViewById(R.id.textInputLayoutNome);
-        final TextInputLayout layoutRazao = findViewById(R.id.textInputLayoutRazao);
-        final TextInputLayout layoutCPF = findViewById(R.id.textInputLayoutCPF);
-        final TextInputLayout layoutCNPJ = findViewById(R.id.textInputLayoutCNPJ);
+        final TextInputLayout layoutNome = findViewById(R.id.editLayout_campoNome);
+        final TextInputLayout layoutRazao = findViewById(R.id.editLayout_campoRazao);
+        final TextInputLayout layoutCPF = findViewById(R.id.editLayout_campoCPF);
+        final TextInputLayout layoutCNPJ = findViewById(R.id.editLayout_campoCNPJ);
 
         loading.setVisibility(View.GONE);
 

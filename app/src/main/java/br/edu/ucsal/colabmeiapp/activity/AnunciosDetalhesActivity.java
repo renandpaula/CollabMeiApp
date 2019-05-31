@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -30,7 +31,13 @@ public class AnunciosDetalhesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_anuncios_detalhes);
 
         //configurar toobar
-//        getSupportActionBar().setTitle("Detalhes do Anúncio");
+        Toolbar toolbar = findViewById(R.id.toolbarPrincipal);
+        toolbar.setTitle("Detalhes do anúncio:");
+        setSupportActionBar(toolbar);
+
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_azul);
 
 
         //inicializar componentes da interface
@@ -78,5 +85,12 @@ public class AnunciosDetalhesActivity extends AppCompatActivity {
         campoPreco = findViewById(R.id.detalhes_textView_Preco);
         campoCategoria = findViewById(R.id.detalhes_textView_Categoria);
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+
+        finish();
+        return false;
     }
 }

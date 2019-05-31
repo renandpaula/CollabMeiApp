@@ -16,7 +16,7 @@
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -47,8 +47,8 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/edit_imageView_editarPerfil"
-                    android:layout_width="96dp"
-                    android:layout_height="96dp"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
@@ -77,7 +77,7 @@
             </android.support.constraint.ConstraintLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInputLayoutNome"
+                android:id="@+id/editLayout_campoNome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -93,15 +93,16 @@
                     android:layout_height="wrap_content"
                     android:hint="Nome Completo"
                     android:inputType="textPersonName"
+                    android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
                     android:textColorHint="@color/colorPrimary" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInputLayoutRazao"
+                android:id="@+id/editLayout_campoRazao"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/background_edit_text_blue"
                 android:textColorHint="@color/colorPrimary"
                 android:visibility="gone"
@@ -112,7 +113,6 @@
                     android:id="@+id/edit_TextRazaoSocial"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
                     android:hint="Razão Social"
                     android:inputType="text"
                     android:textColor="@color/colorPrimary"
@@ -120,7 +120,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInputLayoutCPF"
+                android:id="@+id/editLayout_campoCPF"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -144,7 +144,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInputLayoutCNPJ"
+                android:id="@+id/editLayout_campoCNPJ"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -168,7 +168,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInputLayout14"
+                android:id="@+id/editLayout_campoTelefone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -190,7 +190,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInputLayout15"
+                android:id="@+id/editLayout_campoEndereco"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -209,7 +209,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInputLayout16"
+                android:id="@+id/editLayout_campoEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -229,55 +229,14 @@
                     android:textColorHint="@color/colorPrimary" />
             </android.support.design.widget.TextInputLayout>
 
-            <!--<android.support.design.widget.TextInputLayout-->
-            <!--android:id="@+id/textInputLayout17"-->
-            <!--android:layout_width="395dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="5dp"-->
-            <!--android:background="@drawable/background_edit_text_blue"-->
-            <!--android:textColorHint="@color/colorPrimary"-->
-            <!--tools:layout_editor_absoluteX="5dp"-->
-            <!--tools:layout_editor_absoluteY="491dp">-->
-
-            <!--<android.support.design.widget.TextInputEditText-->
-            <!--android:id="@+id/cadastro_TextSenha"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:hint="Senha"-->
-            <!--android:inputType="textPassword"-->
-            <!--android:textColor="@android:color/white"-->
-            <!--android:textColorHint="@android:color/white" />-->
-            <!--</android.support.design.widget.TextInputLayout>-->
-
-            <!--<android.support.design.widget.TextInputLayout-->
-            <!--android:id="@+id/textInputLayout18"-->
-            <!--android:layout_width="395dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="5dp"-->
-            <!--android:background="@drawable/background_edit_text_blue"-->
-            <!--android:textColorHint="@color/colorPrimary"-->
-            <!--tools:layout_editor_absoluteX="5dp"-->
-            <!--tools:layout_editor_absoluteY="614dp">-->
-
-            <!--<android.support.design.widget.TextInputEditText-->
-            <!--android:id="@+id/cadastro_TextConfirmaSenha"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:hint="Confirmar senha"-->
-            <!--android:inputType="textPassword"-->
-            <!--android:textColor="@android:color/white"-->
-            <!--android:textColorHint="@android:color/white" />-->
-            <!--</android.support.design.widget.TextInputLayout>-->
-
             <Button
                 android:id="@+id/edit_btnEditar"
                 style="@android:style/Widget.Holo.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="25dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/background_btn_entrar"
-                android:onClick="atualizarCadastroUsuario"
                 android:text="Atualizar Perfil"
                 android:textAlignment="center"
                 tools:layout_editor_absoluteX="63dp"

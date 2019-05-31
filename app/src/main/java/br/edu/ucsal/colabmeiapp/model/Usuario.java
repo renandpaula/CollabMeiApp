@@ -3,9 +3,13 @@ package br.edu.ucsal.colabmeiapp.model;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
 import br.edu.ucsal.colabmeiapp.config.FirebaseConfig;
 
-public class Usuario {
+public class Usuario implements Serializable {
 
     private String id;
     private String nomeXrazao;
@@ -20,6 +24,17 @@ public class Usuario {
     public Usuario() {
     }
 
+    public Usuario(String id, String nomeXrazao, String cpfXcnpj, String endereco, String telefone, String email, String senha, String tipo) {
+        this.id = id;
+        this.nomeXrazao = nomeXrazao;
+        this.cpfXcnpj = cpfXcnpj;
+        this.endereco = endereco;
+        this.telefone = telefone;
+        this.email = email;
+        this.senha = senha;
+        this.tipo = tipo;
+    }
+
     public void salvarNoBanco(){
         DatabaseReference firebaseRef = FirebaseConfig.getFirebaseDatabase();
         DatabaseReference usuarios = firebaseRef.child( "usuarios" ).child( getId() );
@@ -27,6 +42,27 @@ public class Usuario {
         usuarios.setValue(this);
     }
 
+    public void atualizar(){
+        DatabaseReference firebaseRef =  FirebaseConfig.getFirebaseDatabase();
+        DatabaseReference usuarioRef =  firebaseRef
+                .child("usuarios")
+                .child(getId());
+
+        usuarioRef.updateChildren(converterParaMap());
+    }
+
+    public Map<String, Object> converterParaMap(){
+        HashMap<String, Object> usuarioMap = new HashMap<>();
+        usuarioMap.put("email", getEmail());
+        usuarioMap.put("nomeXrazao", getNomeXrazao());
+        usuarioMap.put("cpfXcnpj", getCpfXcnpj());
+        usuarioMap.put("endereco", getEndereco());
+        usuarioMap.put("telefone", getTelefone());
+        usuarioMap.put("tipo", getTipo());
+        usuarioMap.put("id", getId());
+        usuarioMap.put("caminhoFoto", getCaminhoFoto());
+        return usuarioMap;
+    }
     public String getId() {
         return id;
     }
@@ -40,7 +76,7 @@ public class Usuario {
     }
 
     public void setNomeXrazao(String nomeXrazao) {
-        this.nomeXrazao = nomeXrazao;
+        this.nomeXrazao = nomeXrazao.toUpperCase();
     }
 
     public String getCpfXcnpj() {

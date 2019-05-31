@@ -78,7 +78,7 @@
             </android.support.constraint.ConstraintLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInputLayoutNome"
+                android:id="@+id/editLayout_campoNome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_edit_text"
@@ -93,12 +93,13 @@
                     android:layout_height="wrap_content"
                     android:hint="Nome Completo"
                     android:inputType="textPersonName"
+                    android:textAllCaps="false"
                     android:textColor="@android:color/white"
                     android:textColorHint="@android:color/white" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInputLayoutRazao"
+                android:id="@+id/editLayout_campoRazao"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -120,7 +121,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInputLayoutCPF"
+                android:id="@+id/editLayout_campoCPF"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -144,7 +145,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInputLayoutCNPJ"
+                android:id="@+id/editLayout_campoCNPJ"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -168,7 +169,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInputLayout14"
+                android:id="@+id/editLayout_campoTelefone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -190,7 +191,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInputLayout15"
+                android:id="@+id/editLayout_campoEndereco"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -209,7 +210,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInputLayout16"
+                android:id="@+id/editLayout_campoEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"

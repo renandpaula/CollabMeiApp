@@ -124,6 +124,7 @@ public class PrincipalActivity extends AppCompatActivity {
             case R.id.menu_sair :
                 autenticacao.signOut();
                 finish();
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 Toast.makeText(PrincipalActivity.this,
                         "Usuario deslogado com sucesso!",
                         Toast.LENGTH_SHORT).show();
