@@ -73,6 +73,9 @@ dependencies {
     //Dependencia CircleImageView
     implementation 'de.hdodenhof:circleimageview:2.2.0'
 
+    //Dependencia Android Image Cropper
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.5.+'
+
     //Dependencia AndroidPhotoFilters
     implementation 'info.androidhive:imagefilters:1.0.7'
 
