@@ -64,6 +64,7 @@ public class CadastrarAnuncioActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastrar_anuncio);
 
+<<<<<<< HEAD
         //validar permissoes
         Permissoes.validarPermissoes(permissoes, this, 1);
 
@@ -75,6 +76,9 @@ public class CadastrarAnuncioActivity extends AppCompatActivity
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+=======
+        getSupportActionBar().setTitle("Novo Anúncio");
+>>>>>>> parent of 77dac0e... alterando layout para versao final
 
         //Configurações iniciais
         storage = FirebaseConfig.getFirebaseStorage();

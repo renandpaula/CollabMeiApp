@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -11,9 +11,9 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        
     </style>
 
+<<<<<<< HEAD
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light">
     <item name="android:textColorSecondary">@color/colorPrimary </item>
     <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
@@ -33,5 +33,10 @@
 
     </style>
 
+=======
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+>>>>>>> parent of 77dac0e... alterando layout para versao final
 
 </resources>

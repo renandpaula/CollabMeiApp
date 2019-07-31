@@ -38,6 +38,7 @@ public class AnunciosDetalhesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anuncios_detalhes);
 
+<<<<<<< HEAD
         //configurar toolbar
         Toolbar toolbar = findViewById(R.id.toolbarPrincipal);
         toolbar.setTitle("Detalhes do anúncio:");
@@ -46,6 +47,10 @@ public class AnunciosDetalhesActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_azul);
+=======
+        //configurar toobar
+        getSupportActionBar().setTitle("Detalhes do Anúncio");
+>>>>>>> parent of 77dac0e... alterando layout para versao final
 
 
         //inicializar componentes da interface

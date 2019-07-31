@@ -19,6 +19,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+<<<<<<< HEAD
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".activity.VisualizarPublicacaoActivity"></activity>
         <activity android:name=".activity.FiltroActivity" />
@@ -46,14 +47,29 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.edu.ucsal.colabmeiapp.activity.MeusAnunciosActivity" />
         </activity>
+=======
+        tools:ignore="GoogleAppIndexingWarning"
+        >
+        <activity android:name=".activity.AnunciosDetalhesActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activity.MainActivity"/>
+
+        <activity android:name=".activity.ComercioActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".activity.CadastrarAnuncioActivity"
+            android:screenOrientation="portrait"/>
+
+>>>>>>> parent of 77dac0e... alterando layout para versao final
         <activity
             android:name=".activity.MeusAnunciosActivity"
             android:label="@string/title_activity_meus_anuncios"
-            android:parentActivityName=".activity.PrincipalActivity"
-            android:screenOrientation="portrait">
+            android:parentActivityName=".activity.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="br.edu.ucsal.colabmeiapp.activity.PrincipalActivity" />
+                android:value="br.edu.ucsal.colabmeiapp.activity.MainActivity" />
         </activity>
         <activity
             android:name=".activity.LoginActivity"
@@ -69,6 +85,7 @@
             android:label="@string/titulo_telaCadastro"
             android:parentActivityName=".activity.LoginActivity"
             android:screenOrientation="portrait" />
+<<<<<<< HEAD
         <activity
             android:name=".activity.MainActivity"
             android:screenOrientation="portrait" />
@@ -78,6 +95,10 @@
 
 =======
 >>>>>>> parent of a0bc98b... Alterando Json
+=======
+        <activity android:name=".activity.MainActivity"
+            android:screenOrientation="portrait"/>
+>>>>>>> parent of 77dac0e... alterando layout para versao final
     </application>
 
 </manifest>
