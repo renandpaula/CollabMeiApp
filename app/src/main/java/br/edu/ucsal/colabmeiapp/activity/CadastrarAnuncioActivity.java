@@ -1,13 +1,13 @@
 package br.edu.ucsal.colabmeiapp.activity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -24,8 +24,6 @@ import android.widget.Toast;
 import com.blackcat.currencyedittext.CurrencyEditText;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.santalu.maskedittext.MaskEditText;
@@ -53,6 +51,8 @@ public class CadastrarAnuncioActivity extends AppCompatActivity
     private Anuncio anuncio;
     private StorageReference storage;
     private AlertDialog dialog;
+    private CropImageView cropImageView;
+    private int numeroImagem;
 
     private String[] permissoes =  new String[]{
             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -110,34 +110,66 @@ public class CadastrarAnuncioActivity extends AppCompatActivity
 
     }
 
-    public void escolherImagem(int requestCode){
-        Intent i =  new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(i, requestCode);
+    public void escolherImagem(int numImagem){
+//        Intent i =  new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//        startActivityForResult(i, requestCode);
+        CropImage.startPickImageActivity(this);
+        numeroImagem = numImagem;
     }
 
 
     @Override
+    @SuppressLint("NewApi")
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
 
-        if ( resultCode == Activity.RESULT_OK){
+        if (requestCode == CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            Uri imageUri = CropImage.getPickImageResultUri(this, data);
 
-            //Recuperar imagem
-            Uri imagemSelecionada = data.getData();
-            String caminhoImagem = imagemSelecionada.toString();
 
-            //Configura imagem no ImageView
-            if (requestCode == 1){
-                fotoAnuncio1.setImageURI(imagemSelecionada);
-            } else if (requestCode == 2) {
-                fotoAnuncio2.setImageURI(imagemSelecionada);
-            } else if (requestCode == 3){
-                fotoAnuncio3.setImageURI(imagemSelecionada);
+            // For API >= 23 we need to check specifically that we have permissions to read external storage.
+            if (CropImage.isReadExternalStoragePermissionsRequired(this, imageUri)) {
+                // request permissions and handle the result in onRequestPermissionsResult()
+                Uri mCropImageUri = imageUri;
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},   CropImage.PICK_IMAGE_PERMISSIONS_REQUEST_CODE);
+            } else {
+                // no permissions required or already granted, can start crop image activity
+                startCropImageActivity(imageUri);
             }
-
-            listaFotosRecuperadas.add(caminhoImagem);
         }
+
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+                Uri resultUri = result.getUri();
+
+                //Recuperar imagem
+//              Uri imagemSelecionada = data.getData();
+                String caminhoImagem = resultUri.toString();
+
+                //Configura imagem no ImageView
+                if (numeroImagem == 1){
+                    fotoAnuncio1.setImageURI(resultUri);
+                } else if (numeroImagem == 2) {
+                    fotoAnuncio2.setImageURI(resultUri);
+                } else if (numeroImagem == 3){
+                    fotoAnuncio3.setImageURI(resultUri);
+                }
+
+                listaFotosRecuperadas.add(caminhoImagem);
+
+
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
+            }
+        }
+    }
+
+    private void startCropImageActivity(Uri imageUri) {
+        CropImage.activity(imageUri)
+                .start(this);
+
     }
 
     public void salvarAnuncio(){
@@ -311,6 +343,8 @@ public class CadastrarAnuncioActivity extends AppCompatActivity
         fotoAnuncio1 = findViewById(R.id.cadastroAnuncio_imageView1);
         fotoAnuncio2 = findViewById(R.id.cadastroAnuncio_imageView2);
         fotoAnuncio3 = findViewById(R.id.cadastroAnuncio_imageView3);
+        cropImageView = findViewById(R.id.cropImageView);
+        numeroImagem = 0;
         fotoAnuncio1.setOnClickListener(this);
         fotoAnuncio2.setOnClickListener(this);
         fotoAnuncio3.setOnClickListener(this);
