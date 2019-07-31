@@ -89,16 +89,18 @@
         <activity
             android:name=".activity.MainActivity"
             android:screenOrientation="portrait" />
-<<<<<<< HEAD
         <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat"/>
 
+<<<<<<< HEAD
 =======
 >>>>>>> parent of a0bc98b... Alterando Json
 =======
         <activity android:name=".activity.MainActivity"
             android:screenOrientation="portrait"/>
 >>>>>>> parent of 77dac0e... alterando layout para versao final
+=======
+>>>>>>> parent of a85fb79... Recuperando versão anterior
     </application>
 
 </manifest>

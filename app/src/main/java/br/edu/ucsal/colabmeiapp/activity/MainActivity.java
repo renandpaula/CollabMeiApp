@@ -17,7 +17,7 @@ import br.edu.ucsal.colabmeiapp.R;
 import br.edu.ucsal.colabmeiapp.config.FirebaseConfig;
 import br.edu.ucsal.colabmeiapp.fragments.ColaborativoFragment;
 import br.edu.ucsal.colabmeiapp.fragments.MeusAnunciosFragment;
-import br.edu.ucsal.colabmeiapp.fragments.SocialFragment;
+
 
 public class MainActivity extends AppCompatActivity {
 

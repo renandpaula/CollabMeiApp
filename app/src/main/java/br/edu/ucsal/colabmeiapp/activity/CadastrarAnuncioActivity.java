@@ -27,6 +27,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.santalu.maskedittext.MaskEditText;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,18 +114,11 @@ public class CadastrarAnuncioActivity extends AppCompatActivity
 
     }
 
-<<<<<<< HEAD
     public void escolherImagem(int numImagem){
 //        Intent i =  new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 //        startActivityForResult(i, requestCode);
         CropImage.startPickImageActivity(this);
         numeroImagem = numImagem;
-=======
-    public void escolherImagem(int requestCode){
-        Intent i =  new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(i, requestCode);
-
->>>>>>> parent of a0bc98b... Alterando Json
     }
 
 
