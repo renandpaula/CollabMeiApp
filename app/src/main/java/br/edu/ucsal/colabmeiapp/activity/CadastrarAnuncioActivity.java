@@ -145,7 +145,6 @@ public class CadastrarAnuncioActivity extends AppCompatActivity
                 Uri resultUri = result.getUri();
 
                 //Recuperar imagem
-//              Uri imagemSelecionada = data.getData();
                 String caminhoImagem = resultUri.toString();
 
                 //Configura imagem no ImageView
