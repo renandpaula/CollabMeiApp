@@ -72,9 +72,12 @@
         <activity
             android:name=".activity.MainActivity"
             android:screenOrientation="portrait" />
+<<<<<<< HEAD
         <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat"/>
 
+=======
+>>>>>>> parent of a0bc98b... Alterando Json
     </application>
 
 </manifest>

@@ -164,6 +164,7 @@ public class Usuario implements Serializable {
         this.caminhoFoto = caminhoFoto;
     }
 
+    @Exclude
     public String getSenha() {
         return senha;
     }
