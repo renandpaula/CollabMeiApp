@@ -61,7 +61,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
             public MyViewHolder(@NonNull View itemView) {
                 super(itemView);
-                foto = itemView.findViewById(R.id.imageViewFotoPesquisa);
+                foto = itemView.findViewById(R.id.imageViewFotoComentario);
                 nome = itemView.findViewById(R.id.textViewNomePesquisa);
 
             }

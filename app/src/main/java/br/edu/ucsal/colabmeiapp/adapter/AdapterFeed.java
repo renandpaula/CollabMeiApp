@@ -1,6 +1,7 @@
 package br.edu.ucsal.colabmeiapp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import com.like.OnLikeListener;
 import java.util.List;
 
 import br.edu.ucsal.colabmeiapp.R;
+import br.edu.ucsal.colabmeiapp.activity.ComentariosActivity;
 import br.edu.ucsal.colabmeiapp.config.FirebaseConfig;
 import br.edu.ucsal.colabmeiapp.helper.UsuarioFirebase;
 import br.edu.ucsal.colabmeiapp.model.Feed;
@@ -62,6 +64,16 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.MyViewHolder> 
 
         myViewHolder.descricao.setText( feed.getDescricao() );
         myViewHolder.nome.setText( feed.getNomeUsuario() );
+
+        //Add evento de clique no comentario
+        myViewHolder.visualizarComentario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, ComentariosActivity.class);
+                i.putExtra("idPostagem", feed.getIdPostagem() );
+                context.startActivity( i );
+            }
+        });
 
         /*
         Estrutura das publicacoes curtidas no Firebase

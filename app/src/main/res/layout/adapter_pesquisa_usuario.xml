@@ -7,15 +7,15 @@
     android:paddingLeft="16dp"
     android:paddingTop="8dp"
     android:paddingRight="16dp"
-    android:paddingBottom="8dp">
+    android:paddingBottom="8dp" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal" >
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imageViewFotoPesquisa"
+            android:id="@+id/imageViewFotoComentario"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_weight="0"
@@ -31,4 +31,7 @@
             android:text="Nome Usuário"
             android:textColor="@color/colorPrimary" />
     </LinearLayout>
+
+    <include layout="@layout/divisor" />
+
 </LinearLayout>
