@@ -2,10 +2,13 @@ package br.edu.ucsal.colabmeiapp.fragments;
 
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,13 +18,14 @@ import android.widget.Button;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 import br.edu.ucsal.colabmeiapp.R;
 import br.edu.ucsal.colabmeiapp.activity.CadastrarAnuncioActivity;
 import br.edu.ucsal.colabmeiapp.activity.FiltroActivity;
 import br.edu.ucsal.colabmeiapp.helper.Permissoes;
 
-import static android.app.Activity.RESULT_OK;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,6 +35,7 @@ public class PublicarFragment extends Fragment {
 //    private static final int SELECAO_CAMERA = 100;
 //    private static final int SELECAO_GALERIA = 200;
 //    private CropImageView cropImageView;
+    private Activity activity;
 
     private String[] permissoes =  new String[]{
             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -53,8 +58,8 @@ public class PublicarFragment extends Fragment {
         Permissoes.validarPermissoes(permissoes, getActivity(), 1);
 
         //inicializa componentes
-        buttonNovoAnuncio = view.findViewById(R.id.button_novaPostagem);
-        buttonNovaPostagem = view.findViewById(R.id.button_novoAnuncio);
+        buttonNovoAnuncio = view.findViewById(R.id.button_novoAnuncio);
+        buttonNovaPostagem = view.findViewById(R.id.button_novaPostagem);
 
         //add evento de click nos botoes;
         buttonNovoAnuncio.setOnClickListener(new View.OnClickListener() {
@@ -67,31 +72,27 @@ public class PublicarFragment extends Fragment {
         buttonNovaPostagem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CropImage.startPickImageActivity(getActivity());
+                abrePicker();
             }
         });
 
         return view;
     }
 
-    private void startCropImageActivity(Uri imageUri) {
-        CropImage.activity(imageUri)
-                .start(getActivity());
-
+    public void abrePicker(){
+        CropImage.startPickImageActivity(getContext(), this);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        Bitmap imagem = null;
-
-        if (requestCode == CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE && resultCode == RESULT_OK) {
-            Uri imageUri = CropImage.getPickImageResultUri(getActivity(), data);
+         if (requestCode == CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            Uri imageUri = CropImage.getPickImageResultUri(getContext(), data);
 
 
             // For API >= 23 we need to check specifically that we have permissions to read external storage.
-            if (CropImage.isReadExternalStoragePermissionsRequired(getActivity(), imageUri)) {
+            if (CropImage.isReadExternalStoragePermissionsRequired(getContext(), imageUri)) {
                 // request permissions and handle the result in onRequestPermissionsResult()
                 Uri mCropImageUri = imageUri;
                 requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},   CropImage.PICK_IMAGE_PERMISSIONS_REQUEST_CODE);
@@ -103,9 +104,17 @@ public class PublicarFragment extends Fragment {
 
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            if (resultCode == RESULT_OK) {
+            if (resultCode == Activity.RESULT_OK) {
 
-                imagem = result.getBitmap();
+                Uri resultUri = result.getUri();
+
+                Bitmap imagem = null;
+
+                try {
+                    imagem = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), resultUri);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
                 //valida imagem selecionada
                 if (imagem != null){
@@ -130,7 +139,10 @@ public class PublicarFragment extends Fragment {
 
     }
 
+    private void startCropImageActivity(Uri imageUri) {
+        CropImage.activity(imageUri)
+                .start(getContext(),this);
 
-
+    }
 
 }
