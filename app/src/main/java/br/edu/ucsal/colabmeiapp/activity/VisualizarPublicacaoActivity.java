@@ -62,8 +62,7 @@ public class VisualizarPublicacaoActivity extends AppCompatActivity {
         textNomePerfilPublicacao = findViewById(R.id.textNomePerfilPublicacao);
         textCurtidasPerfilPublicacao = findViewById(R.id.textCurtidasPerfilPublicacao);
         textDescricaoPerfilPublicacao = findViewById(R.id.textDescricaoPerfilPublicacao);
-        textVerComentariosPerfilPublicacao = findViewById(R.id.textVerComentariosPerfilPublicacao);
-        fotoPublicadaPerfilPublicacao = findViewById(R.id.fotoPublicadaPerfilPublicacao);
+        fotoPublicadaPerfilPublicacao = findViewById(R.id.imagePublicacaoSeleciona);
         imagePerfilPublicacao = findViewById(R.id.imagePerfilPublicacao);
 
     }

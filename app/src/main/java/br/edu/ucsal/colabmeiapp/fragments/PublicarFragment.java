@@ -6,26 +6,31 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.theartofdev.edmodo.cropper.CropImage;
+
 import java.io.ByteArrayOutputStream;
 
 import br.edu.ucsal.colabmeiapp.R;
+import br.edu.ucsal.colabmeiapp.activity.CadastrarAnuncioActivity;
 import br.edu.ucsal.colabmeiapp.activity.FiltroActivity;
 import br.edu.ucsal.colabmeiapp.helper.Permissoes;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class PublicarFragment extends Fragment {
-    private Button buttonAbrirGaleria, buttonAbrirCamera;
-    private static final int SELECAO_CAMERA = 100;
-    private static final int SELECAO_GALERIA = 200;
+    private Button buttonNovaPostagem, buttonNovoAnuncio;
+//    private static final int SELECAO_CAMERA = 100;
+//    private static final int SELECAO_GALERIA = 200;
+//    private CropImageView cropImageView;
 
     private String[] permissoes =  new String[]{
             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -48,53 +53,59 @@ public class PublicarFragment extends Fragment {
         Permissoes.validarPermissoes(permissoes, getActivity(), 1);
 
         //inicializa componentes
-        buttonAbrirCamera = view.findViewById(R.id.button_abrirCamera);
-        buttonAbrirGaleria = view.findViewById(R.id.button_abrirGaleria);
+        buttonNovoAnuncio = view.findViewById(R.id.button_novaPostagem);
+        buttonNovaPostagem = view.findViewById(R.id.button_novoAnuncio);
 
-        //add evento de click no botao camera;
-        buttonAbrirCamera.setOnClickListener(new View.OnClickListener() {
+        //add evento de click nos botoes;
+        buttonNovoAnuncio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if (i.resolveActivity(getActivity().getPackageManager()) != null){
-                    startActivityForResult(i, SELECAO_CAMERA);
-                }
+                startActivity(new Intent(getActivity(), CadastrarAnuncioActivity.class));
             }
         });
 
-        buttonAbrirGaleria.setOnClickListener(new View.OnClickListener() {
+        buttonNovaPostagem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                if (i.resolveActivity(getActivity().getPackageManager()) != null){
-                    startActivityForResult(i, SELECAO_GALERIA);
-                }
+                CropImage.startPickImageActivity(getActivity());
             }
         });
 
         return view;
     }
 
+    private void startCropImageActivity(Uri imageUri) {
+        CropImage.activity(imageUri)
+                .start(getActivity());
+
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == getActivity().RESULT_OK){
+        Bitmap imagem = null;
 
-            Bitmap imagem = null;
+        if (requestCode == CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE && resultCode == RESULT_OK) {
+            Uri imageUri = CropImage.getPickImageResultUri(getActivity(), data);
 
-            try {
-                //valida tipo selecao imagem
-                switch (requestCode){
-                    case SELECAO_CAMERA :
-                        imagem = (Bitmap) data.getExtras().get("data");
-                        break;
 
-                    case SELECAO_GALERIA :
-                        Uri localImagemSeleciona = data.getData();
-                        imagem = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), localImagemSeleciona);
-                        break;
-                }
+            // For API >= 23 we need to check specifically that we have permissions to read external storage.
+            if (CropImage.isReadExternalStoragePermissionsRequired(getActivity(), imageUri)) {
+                // request permissions and handle the result in onRequestPermissionsResult()
+                Uri mCropImageUri = imageUri;
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},   CropImage.PICK_IMAGE_PERMISSIONS_REQUEST_CODE);
+            } else {
+                // no permissions required or already granted, can start crop image activity
+                startCropImageActivity(imageUri);
+            }
+        }
+
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+
+                imagem = result.getBitmap();
 
                 //valida imagem selecionada
                 if (imagem != null){
@@ -109,9 +120,17 @@ public class PublicarFragment extends Fragment {
                     i.putExtra("fotoEscolhida", dadosImagem);
                     startActivity(i);
                 }
-            }catch (Exception e){
-                e.printStackTrace();
+
+
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
             }
         }
+
+
     }
+
+
+
+
 }

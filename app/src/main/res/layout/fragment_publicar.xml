@@ -11,19 +11,19 @@
 
 
     <Button
-        android:id="@+id/button_abrirGaleria"
+        android:id="@+id/button_novaPostagem"
         style="@android:style/Widget.Holo.Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:background="@drawable/background_btn_entrar"
-        android:text="Abrir Galeria" />
+        android:text="Nova Publicação" />
 
     <Button
-        android:id="@+id/button_abrirCamera"
+        android:id="@+id/button_novoAnuncio"
         style="@android:style/Widget.Holo.Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/background_btn_entrar"
-        android:text="Abrir Câmera" />
+        android:text="Novo Anúncio" />
 </LinearLayout>

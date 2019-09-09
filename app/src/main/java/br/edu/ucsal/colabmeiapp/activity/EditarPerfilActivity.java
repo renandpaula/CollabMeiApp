@@ -1,6 +1,8 @@
 package br.edu.ucsal.colabmeiapp.activity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -32,8 +34,11 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.santalu.maskedittext.MaskEditText;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 import br.edu.ucsal.colabmeiapp.R;
 import br.edu.ucsal.colabmeiapp.config.FirebaseConfig;
@@ -180,73 +185,97 @@ public class EditarPerfilActivity extends AppCompatActivity {
         alterarFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                if (i.resolveActivity(getPackageManager()) != null){
-                    startActivityForResult(i, SELECAO_GALERIA);
-                }
-
+                escolherImagem();
             }
         });
     }
 
+    public void escolherImagem(){
+        CropImage.startPickImageActivity(this);
+    }
+
     @Override
+    @SuppressLint("NewApi")
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(resultCode == RESULT_OK){
-            Bitmap imagem = null;
-            try {
+        if (requestCode == CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            Uri imageUri = CropImage.getPickImageResultUri(this, data);
 
-                //Selecao apenas da galeria
-                switch (requestCode){
-                    case SELECAO_GALERIA:
-                        Uri localImagemSelecionada = data.getData();
-                        imagem = MediaStore.Images.Media.getBitmap(getContentResolver(), localImagemSelecionada);
-                        break;
-                }
 
-                //Caso tenha sido escolhido uma imagem
-                if (imagem != null){
-
-                    //configura imagem na tela
-                    imageEditarPerfil.setImageBitmap(imagem);
-
-                    //recupera dados da imagem
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    imagem.compress((Bitmap.CompressFormat.JPEG), 70, baos);
-                    byte[] dadosImagem =  baos.toByteArray();
-
-                    //salvar no firebase
-                    StorageReference imagemRef =  storageRef
-                            .child("imagens")
-                            .child("perfil")
-                            .child(identificadorUsuario+".jpeg");
-                    UploadTask uploadTask = imagemRef.putBytes(dadosImagem);
-                    uploadTask.addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(EditarPerfilActivity.this,
-                                    "Erro ao fazer upload da imagem!",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                            //Recupera local da foto
-                            Uri url = taskSnapshot.getDownloadUrl();
-                            atualizarFotoUsuario(url);
-                            Toast.makeText(EditarPerfilActivity.this,
-                                    "Sucesso ao fazer upload da imagem!",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-
-            }catch (Exception e){
-                e.printStackTrace();
+            // For API >= 23 we need to check specifically that we have permissions to read external storage.
+            if (CropImage.isReadExternalStoragePermissionsRequired(this, imageUri)) {
+                // request permissions and handle the result in onRequestPermissionsResult()
+                Uri mCropImageUri = imageUri;
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},   CropImage.PICK_IMAGE_PERMISSIONS_REQUEST_CODE);
+            } else {
+                // no permissions required or already granted, can start crop image activity
+                startCropImageActivity(imageUri);
             }
         }
+
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+                Uri resultUri = result.getUri();
+
+                Bitmap imagem = null;
+                try {
+                    imagem = MediaStore.Images.Media.getBitmap(getContentResolver(), resultUri);
+
+                    //Caso tenha sido escolhido uma imagem
+                    if (imagem != null){
+
+                        //configura imagem na tela
+                        imageEditarPerfil.setImageBitmap(imagem);
+
+                        //recupera dados da imagem
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        imagem.compress((Bitmap.CompressFormat.JPEG), 70, baos);
+                        byte[] dadosImagem =  baos.toByteArray();
+
+                        //salvar no firebase
+                        StorageReference imagemRef =  storageRef
+                                .child("imagens")
+                                .child("perfil")
+                                .child(identificadorUsuario+".jpeg");
+                        UploadTask uploadTask = imagemRef.putBytes(dadosImagem);
+                        uploadTask.addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(EditarPerfilActivity.this,
+                                        "Erro ao fazer upload da imagem!",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                                //Recupera local da foto
+                                Uri url = taskSnapshot.getDownloadUrl();
+                                atualizarFotoUsuario(url);
+                                Toast.makeText(EditarPerfilActivity.this,
+                                        "Sucesso ao fazer upload da imagem!",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
+            }
+        }
+
+    }
+
+    private void startCropImageActivity(Uri imageUri) {
+        CropImage.activity(imageUri)
+                .setCropShape(CropImageView.CropShape.OVAL)
+                .start(this);
 
     }
 

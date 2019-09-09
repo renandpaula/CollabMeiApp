@@ -1,10 +1,14 @@
 package br.edu.ucsal.colabmeiapp.model;
 
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 import br.edu.ucsal.colabmeiapp.config.FirebaseConfig;
+import br.edu.ucsal.colabmeiapp.helper.UsuarioFirebase;
 
 public class Publicacao implements Serializable {
 
@@ -31,12 +35,43 @@ public class Publicacao implements Serializable {
         setId(idPostagem);
     }
 
-    public boolean salvar(){
+    public boolean salvar(DataSnapshot seguidoresSnapshot){
+        Map objeto = new HashMap();
+        Usuario usuarioLogado = UsuarioFirebase.getDadosUsuariologado();
+
         DatabaseReference firebaseRef =  FirebaseConfig.getFirebaseDatabase();
-        DatabaseReference postagensRef = firebaseRef.child("publicacoes")
-                .child(getIdUsuario())
-                .child(getId());
-        postagensRef.setValue(this);
+
+        //Referencia para publicacao
+        String combinacaoId = "/" + getIdUsuario() + "/" + getId();
+        objeto.put("/publicacoes" + combinacaoId, this );
+
+        //Referencia para feed
+        for (DataSnapshot seguidores: seguidoresSnapshot.getChildren()){
+
+            /*
+            Estrutura do feed
+                +feed
+                    +id_seguidor<fulano>
+                        +id_postagem<XX>
+                            postagem<por ciclano>
+             */
+
+            String idSeguidor =  seguidores.getKey();
+
+            //montando o objeto
+            HashMap<String, Object> dadosSeguidor = new HashMap<>();
+            dadosSeguidor.put("fotoPublicacao", getCaminhoFoto());
+            dadosSeguidor.put("descricao", getDescricao());
+            dadosSeguidor.put("idPublicacao", getId());
+            dadosSeguidor.put("nomeUsuario", usuarioLogado.getNomeXrazao());
+            dadosSeguidor.put("fotoUsuario", usuarioLogado.getCaminhoFoto());
+
+            String idsAtualizacao = "/" + idSeguidor + "/" + getId();
+            objeto.put("/feed" + idsAtualizacao, dadosSeguidor );
+
+        }
+
+        firebaseRef.updateChildren( objeto );
         return true;
     }
 

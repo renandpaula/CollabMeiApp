@@ -204,8 +204,8 @@ public class PerfilFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        aplicaFotoPerfil();
         recuperarDadosDoUsuarioLogado();
+        aplicaFotoPerfil();
     }
 
     @Override
