@@ -30,9 +30,9 @@ public class Publicacao implements Serializable {
     public Publicacao() {
 
         DatabaseReference firebaseRef = FirebaseConfig.getFirebaseDatabase();
-        DatabaseReference postagenRef = firebaseRef.child("publicacoes");
-        String idPostagem = postagenRef.push().getKey(); //gera id
-        setId(idPostagem);
+        DatabaseReference postagemRef = firebaseRef.child("postagens");
+        String idPostagem = postagemRef.push().getKey(); //gera id
+        setId( idPostagem );
     }
 
     public boolean salvar(DataSnapshot seguidoresSnapshot){
@@ -43,7 +43,7 @@ public class Publicacao implements Serializable {
 
         //Referencia para publicacao
         String combinacaoId = "/" + getIdUsuario() + "/" + getId();
-        objeto.put("/publicacoes" + combinacaoId, this );
+        objeto.put("/postagens" + combinacaoId, this );
 
         //Referencia para feed
         for (DataSnapshot seguidores: seguidoresSnapshot.getChildren()){
@@ -60,9 +60,9 @@ public class Publicacao implements Serializable {
 
             //montando o objeto
             HashMap<String, Object> dadosSeguidor = new HashMap<>();
-            dadosSeguidor.put("fotoPublicacao", getCaminhoFoto());
+            dadosSeguidor.put("fotoPostagem", getCaminhoFoto());
             dadosSeguidor.put("descricao", getDescricao());
-            dadosSeguidor.put("idPublicacao", getId());
+            dadosSeguidor.put("idPostagem", getId());
             dadosSeguidor.put("nomeUsuario", usuarioLogado.getNomeXrazao());
             dadosSeguidor.put("fotoUsuario", usuarioLogado.getCaminhoFoto());
 

@@ -26,8 +26,8 @@ public class PublicacaoCurtida {
 
         DatabaseReference pCurtidasRef = firebaseRef
                 .child("postagens-curtidas")
-                .child(feed.getId()) //id_postagem
-                .child(usuario.getId()); //id_usuario_logado
+                .child( feed.getIdPostagem() ) //id_postagem
+                .child( usuario.getId() ); //id_usuario_logado
         pCurtidasRef.setValue( dadosUsuario );
 
         //atualiza quantidade de curtidas
@@ -40,9 +40,9 @@ public class PublicacaoCurtida {
 
         DatabaseReference pCurtidasRef = firebaseRef
                 .child("postagens-curtidas")
-                .child(feed.getId()) //id_postagem
+                .child( feed.getIdPostagem() ) //id_postagem
                 .child("qtdCurtidas");
-        setQtdCurtidas(getQtdCurtidas() + valor);
+        setQtdCurtidas( getQtdCurtidas() + valor);
         pCurtidasRef.setValue(getQtdCurtidas());
     }
 
@@ -51,8 +51,8 @@ public class PublicacaoCurtida {
 
         DatabaseReference pCurtidasRef = firebaseRef
                 .child("postagens-curtidas")
-                .child(feed.getId()) //id_postagem
-                .child(usuario.getId()); //id_usuario_logado
+                .child( feed.getIdPostagem() ) //id_postagem
+                .child( usuario.getId() ); //id_usuario_logado
         pCurtidasRef.removeValue();
 
         //atualiza quantidade de curtidas

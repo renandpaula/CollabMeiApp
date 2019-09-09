@@ -2,8 +2,8 @@ package br.edu.ucsal.colabmeiapp.model;
 
 public class Feed {
 
-    private String id;
-    private String fotoPublicacao;
+    private String idPostagem;
+    private String fotoPostagem;
     private String descricao;
     private String nomeUsuario;
     private String fotoUsuario;
@@ -11,20 +11,20 @@ public class Feed {
     public Feed() {
     }
 
-    public String getId() {
-        return id;
+    public String getIdPostagem() {
+        return idPostagem;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdPostagem(String idPostagem) {
+        this.idPostagem = idPostagem;
     }
 
-    public String getFotoPublicacao() {
-        return fotoPublicacao;
+    public String getFotoPostagem() {
+        return fotoPostagem;
     }
 
-    public void setFotoPublicacao(String fotoPublicacao) {
-        this.fotoPublicacao = fotoPublicacao;
+    public void setFotoPostagem(String fotoPostagem) {
+        this.fotoPostagem = fotoPostagem;
     }
 
     public String getDescricao() {

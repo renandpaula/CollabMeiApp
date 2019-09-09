@@ -26,6 +26,7 @@ import br.edu.ucsal.colabmeiapp.R;
 import br.edu.ucsal.colabmeiapp.adapter.AdapterAnuncios;
 import br.edu.ucsal.colabmeiapp.config.FirebaseConfig;
 import br.edu.ucsal.colabmeiapp.helper.RecyclerItemClickListener;
+import br.edu.ucsal.colabmeiapp.helper.UsuarioFirebase;
 import br.edu.ucsal.colabmeiapp.model.Anuncio;
 import dmax.dialog.SpotsDialog;
 
@@ -45,7 +46,7 @@ public class MeusAnunciosActivity extends AppCompatActivity {
         //Configuracoes iniciais
         anuncioUsuarioRef = FirebaseConfig.getFirebaseDatabase()
                 .child("meus anuncios")
-                .child(FirebaseConfig.getIdUsuario());
+                .child(UsuarioFirebase.getIdentificadorUsuario());
 
         inicializarComponentes();
 

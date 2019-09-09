@@ -3346,11 +3346,11 @@ instanceKlass org/gradle/internal/change/ChangeVisitor
 instanceKlass org/gradle/internal/execution/impl/steps/SkipUpToDateStep
 instanceKlass org/gradle/internal/execution/impl/steps/Context
 instanceKlass org/gradle/internal/execution/impl/DefaultWorkExecutor
-instanceKlass org/gradle/internal/id/UniqueId$1
+instanceKlass org/gradle/internal/idPostagem/UniqueId$1
 instanceKlass com/google/common/base/Ascii
 instanceKlass com/google/common/io/BaseEncoding$Alphabet
 instanceKlass com/google/common/io/BaseEncoding
-instanceKlass org/gradle/internal/id/UniqueId
+instanceKlass org/gradle/internal/idPostagem/UniqueId
 instanceKlass org/gradle/api/internal/artifacts/DefaultDependencyManagementServices$ArtifactTransformResolutionGradleUserHomeServices$2
 instanceKlass org/gradle/internal/execution/timeout/Timeout
 instanceKlass org/gradle/internal/execution/timeout/impl/DefaultTimeoutHandler
@@ -4771,7 +4771,7 @@ instanceKlass org/gradle/initialization/NotifyProjectsLoadedBuildOperationType$R
 instanceKlass org/gradle/initialization/NotifyingBuildLoader
 instanceKlass org/gradle/api/internal/project/ProjectFactory
 instanceKlass org/gradle/api/internal/project/DefaultProjectRegistry
-instanceKlass org/gradle/internal/id/LongIdGenerator
+instanceKlass org/gradle/internal/idPostagem/LongIdGenerator
 instanceKlass org/gradle/configuration/DefaultInitScriptProcessor
 instanceKlass org/gradle/initialization/DefaultGradleLauncher$3
 instanceKlass org/gradle/initialization/DefaultGradleLauncher$2
@@ -5878,7 +5878,7 @@ instanceKlass org/gradle/api/internal/FeaturePreviews
 instanceKlass org/gradle/internal/filewatch/PendingChangesManager
 instanceKlass org/gradle/api/internal/attributes/DefaultImmutableAttributesFactory
 instanceKlass org/gradle/api/internal/attributes/ImmutableAttributesFactory
-instanceKlass org/gradle/internal/scopeids/id/ScopeId
+instanceKlass org/gradle/internal/scopeids/idPostagem/ScopeId
 instanceKlass org/gradle/internal/scopeids/PersistentScopeIdLoader
 instanceKlass org/gradle/internal/fingerprint/impl/AbstractFileCollectionFingerprinter
 instanceKlass org/gradle/internal/featurelifecycle/DeprecatedUsageBuildOperationProgressBroadaster
@@ -6348,7 +6348,7 @@ instanceKlass org/gradle/launcher/daemon/registry/PersistentDaemonRegistry
 instanceKlass org/gradle/cache/internal/CacheAccessSerializer$1
 instanceKlass org/gradle/launcher/daemon/registry/DaemonRegistryServices$1
 instanceKlass java/util/Random
-instanceKlass org/gradle/internal/id/RandomLongIdGenerator
+instanceKlass org/gradle/internal/idPostagem/RandomLongIdGenerator
 instanceKlass org/gradle/cache/internal/DefaultProcessMetaDataProvider
 instanceKlass org/gradle/cache/FileLock
 instanceKlass org/gradle/cache/FileAccess
@@ -6382,7 +6382,7 @@ instanceKlass org/gradle/launcher/exec/BuildActionParameters
 instanceKlass org/gradle/launcher/daemon/protocol/DaemonMessageSerializer$BuildActionParametersSerializer
 instanceKlass org/gradle/launcher/daemon/protocol/DaemonMessageSerializer$BuildSerializer
 instanceKlass org/gradle/launcher/daemon/protocol/DaemonMessageSerializer
-instanceKlass org/gradle/internal/id/UUIDGenerator
+instanceKlass org/gradle/internal/idPostagem/UUIDGenerator
 instanceKlass org/gradle/internal/remote/MessagingClient
 instanceKlass org/gradle/internal/remote/internal/OutgoingConnector
 instanceKlass org/gradle/internal/remote/internal/IncomingConnector
@@ -6546,7 +6546,7 @@ instanceKlass org/gradle/internal/fingerprint/FileCollectionFingerprinter
 instanceKlass org/gradle/internal/snapshot/FileSystemSnapshotter
 instanceKlass org/gradle/internal/snapshot/FileSystemMirror
 instanceKlass org/gradle/process/internal/worker/WorkerProcessFactory
-instanceKlass org/gradle/internal/id/IdGenerator
+instanceKlass org/gradle/internal/idPostagem/IdGenerator
 instanceKlass org/gradle/internal/classpath/CachedClasspathTransformer
 instanceKlass org/gradle/internal/classloader/HashingClassLoaderFactory
 instanceKlass org/gradle/internal/classloader/ClassLoaderHasher

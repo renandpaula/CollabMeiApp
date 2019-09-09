@@ -79,7 +79,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
 
         usuarioLogado = UsuarioFirebase.getDadosUsuariologado();
         storageRef = FirebaseConfig.getFirebaseStorage();
-        identificadorUsuario = FirebaseConfig.getIdUsuario();
+        identificadorUsuario = UsuarioFirebase.getIdentificadorUsuario();
 
         //configura toolbar
         Toolbar toolbar = findViewById(R.id.toolbarPrincipal);
@@ -96,7 +96,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
 
         //recuperar dados do usuario
         recuperaPorId(identificadorUsuario);
-        FirebaseUser usuarioPerfil = FirebaseConfig.getUsuarioAtual();
+        FirebaseUser usuarioPerfil = UsuarioFirebase.getUsuarioLogado();
 
         Uri url = usuarioPerfil.getPhotoUrl();
         if(url != null){

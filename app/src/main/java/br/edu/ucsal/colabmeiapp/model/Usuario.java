@@ -57,18 +57,18 @@ public class Usuario implements Serializable {
 
     public Map<String, Object> converterParaMap(){
         HashMap<String, Object> usuarioMap = new HashMap<>();
-        usuarioMap.put("email", getEmail());
+//        usuarioMap.put("email", getEmail());
         usuarioMap.put("nomeXrazao", getNomeXrazao());
         usuarioMap.put("nome", getNomeXrazao());
         usuarioMap.put("cpfXcnpj", getCpfXcnpj());
         usuarioMap.put("endereco", getEndereco());
         usuarioMap.put("telefone", getTelefone());
-        usuarioMap.put("tipo", getTipo());
-        usuarioMap.put("id", getId());
+//        usuarioMap.put("tipo", getTipo());
+//        usuarioMap.put("id", getIdPostagem());
         usuarioMap.put("caminhoFoto", getCaminhoFoto());
-        usuarioMap.put("seguidores", getSeguidores());
-        usuarioMap.put("seguindo", getSeguindo());
-        usuarioMap.put("postagens", getPostagens());
+//        usuarioMap.put("seguidores", getSeguidores());
+//        usuarioMap.put("seguindo", getSeguindo());
+//        usuarioMap.put("postagens", getPostagens());
         return usuarioMap;
     }
 
@@ -76,7 +76,7 @@ public class Usuario implements Serializable {
         DatabaseReference firebaseRef =  FirebaseConfig.getFirebaseDatabase();
         DatabaseReference usuarioRef =  firebaseRef
                 .child("usuarios")
-                .child(getId());
+                .child( getId() );
 
         HashMap<String, Object> dados = new HashMap<>();
         dados.put("postagens", getPostagens());

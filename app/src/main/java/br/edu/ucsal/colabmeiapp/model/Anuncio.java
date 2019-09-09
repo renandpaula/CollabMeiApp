@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import br.edu.ucsal.colabmeiapp.config.FirebaseConfig;
+import br.edu.ucsal.colabmeiapp.helper.UsuarioFirebase;
 
 public class Anuncio implements Serializable {
 
@@ -29,7 +30,7 @@ public class Anuncio implements Serializable {
 
     public void salvar(){
 
-        String idUsuarioLogado = FirebaseConfig.getIdUsuario();
+        String idUsuarioLogado = UsuarioFirebase.getIdentificadorUsuario();
         setIdUsuario(idUsuarioLogado);
 
         DatabaseReference anuncioRef = FirebaseConfig.getFirebaseDatabase()
@@ -50,7 +51,7 @@ public class Anuncio implements Serializable {
     }
 
     public void remover(){
-        String idUsuarioLogado = FirebaseConfig.getIdUsuario();
+        String idUsuarioLogado = UsuarioFirebase.getIdentificadorUsuario();
         setIdUsuario(idUsuarioLogado);
         DatabaseReference anuncioRef = FirebaseConfig.getFirebaseDatabase()
                 .child("meus anuncios")

@@ -13,35 +13,28 @@ public class FirebaseConfig {
     private static FirebaseAuth referenciaAutenticacao;
     private static StorageReference referenciaStorage;
 
-    public static String getIdUsuario(){
-        FirebaseAuth autenticacao = getFirebaseAutenticacao();
-        return autenticacao.getCurrentUser().getUid();
-    }
-
-    public static FirebaseUser getUsuarioAtual() {
-        FirebaseAuth usuario = FirebaseConfig.getFirebaseAutenticacao();
-        return usuario.getCurrentUser();
-    }
-
+    //Retornar a referencia do Database
     public static DatabaseReference getFirebaseDatabase() {
 
-        //Retornar a referencia do Database
         if (referenciaFirebase == null) {
             referenciaFirebase = FirebaseDatabase.getInstance().getReference();
         }
         return referenciaFirebase;
     }
 
+    //retorna a instancia do FirebaseAuth
     public static FirebaseAuth getFirebaseAutenticacao() {
 
-        //Retornar a referencia do Database
         if (referenciaAutenticacao == null) {
             referenciaAutenticacao = FirebaseAuth.getInstance();
         }
         return referenciaAutenticacao;
     }
 
+
+    //Retorna instancia do FirebaseStorage
     public static StorageReference getFirebaseStorage(){
+
         if (referenciaStorage == null){
             referenciaStorage = FirebaseStorage.getInstance().getReference();
         }

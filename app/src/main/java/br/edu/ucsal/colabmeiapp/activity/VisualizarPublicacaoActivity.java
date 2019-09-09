@@ -39,7 +39,7 @@ public class VisualizarPublicacaoActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null){
 
-            Publicacao publicacao = (Publicacao) bundle.getSerializable("publicacao");
+            Publicacao publicacao = (Publicacao) bundle.getSerializable("postagem");
             Usuario usuario = (Usuario) bundle.getSerializable("usuario");
 
             //exibe dados do usuario
@@ -62,7 +62,7 @@ public class VisualizarPublicacaoActivity extends AppCompatActivity {
         textNomePerfilPublicacao = findViewById(R.id.textNomePerfilPublicacao);
         textCurtidasPerfilPublicacao = findViewById(R.id.textCurtidasPerfilPublicacao);
         textDescricaoPerfilPublicacao = findViewById(R.id.textDescricaoPerfilPublicacao);
-        fotoPublicadaPerfilPublicacao = findViewById(R.id.imagePublicacaoSeleciona);
+        fotoPublicadaPerfilPublicacao = findViewById(R.id.imagePublicacaoSelecionada);
         imagePerfilPublicacao = findViewById(R.id.imagePerfilPublicacao);
 
     }

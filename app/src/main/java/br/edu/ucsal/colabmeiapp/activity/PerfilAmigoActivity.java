@@ -28,6 +28,7 @@ import java.util.List;
 import br.edu.ucsal.colabmeiapp.R;
 import br.edu.ucsal.colabmeiapp.adapter.AdapterGrid;
 import br.edu.ucsal.colabmeiapp.config.FirebaseConfig;
+import br.edu.ucsal.colabmeiapp.helper.UsuarioFirebase;
 import br.edu.ucsal.colabmeiapp.model.Publicacao;
 import br.edu.ucsal.colabmeiapp.model.Usuario;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -60,7 +61,7 @@ public class PerfilAmigoActivity extends AppCompatActivity {
         firebaseRef = FirebaseConfig.getFirebaseDatabase();
         usuarioRef = firebaseRef.child("usuarios");
         seguidoresRef = firebaseRef.child("seguidores");
-        idUsuarioLogado = FirebaseConfig.getIdUsuario();
+        idUsuarioLogado = UsuarioFirebase.getIdentificadorUsuario();
 
 
         //inicializa componentes
@@ -81,7 +82,7 @@ public class PerfilAmigoActivity extends AppCompatActivity {
 
             //configura ref postagens usuario
             postagensUsuarioRef = FirebaseConfig.getFirebaseDatabase()
-                    .child("publicacoes")
+                    .child("postagens")
                     .child(usuarioSelecionado.getId());
 
             //Seta o nome do perfil selecionado na toolbar
@@ -109,7 +110,7 @@ public class PerfilAmigoActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Publicacao publicacao = publicacoes.get(position);
                 Intent i = new Intent(getApplicationContext(), VisualizarPublicacaoActivity.class);
-                i.putExtra("publicacao", publicacao);
+                i.putExtra("postagem", publicacao);
                 i.putExtra("usuario", usuarioSelecionado);
 
                 startActivity(i);
@@ -121,7 +122,7 @@ public class PerfilAmigoActivity extends AppCompatActivity {
 
     private void inicializarComponentes(){
         buttonAcaoPerfil = findViewById(R.id.buttonAcaoPerfil);
-        buttonAcaoPerfil.setText("Editar Perfil");
+        buttonAcaoPerfil.setText("Carregando");
         imagePerfil = findViewById(R.id.perfil_image);
         textPostagens = findViewById(R.id.textView_Publicacoes);
         textSeguidores =  findViewById(R.id.textView_Seguidores);
@@ -195,8 +196,8 @@ public class PerfilAmigoActivity extends AppCompatActivity {
 
     private void verificaSegueUsuarioAmigo(){
         DatabaseReference seguidorRef = seguidoresRef
-                .child(idUsuarioLogado)
-                .child(usuarioSelecionado.getId());
+                .child( usuarioSelecionado.getId() )
+                .child( idUsuarioLogado );
 
         seguidorRef.addListenerForSingleValueEvent(
                 new ValueEventListener() {
@@ -239,17 +240,17 @@ public class PerfilAmigoActivity extends AppCompatActivity {
     private void salvarSeguidor(Usuario userLogado, Usuario userAmigo){
         /* estrutura:
         seguidores
-            id_usuariologado
-                id_usuarioASeguir
-                    dados_seguindo
+            id_usuarioAmigo
+             id_usuariologado
+                dados_logado
          */
-        HashMap<String,Object> dadosAmigo = new HashMap<>();
-        dadosAmigo.put("nomeXrazao", userAmigo.getNomeXrazao());
-        dadosAmigo.put("caminhoFoto", userAmigo.getCaminhoFoto());
+        HashMap<String,Object> dadosUserLogado = new HashMap<>();
+        dadosUserLogado.put("nomeXrazao", userLogado.getNomeXrazao());
+        dadosUserLogado.put("caminhoFoto", userLogado.getCaminhoFoto());
         DatabaseReference seguidorRef = seguidoresRef
-                .child(userLogado.getId())
-                .child(userAmigo.getId());
-        seguidorRef.setValue(dadosAmigo);
+                .child(userAmigo.getId())
+                .child(userLogado.getId());
+        seguidorRef.setValue(dadosUserLogado);
 
         //alterar botao
         buttonAcaoPerfil.setText("Seguindo");

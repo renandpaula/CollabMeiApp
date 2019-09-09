@@ -23,7 +23,7 @@
         android:title="Comunidade" />
 
     <!--<item android:id="@+id/ic_meusAnuncios"-->
-        <!--android:icon="@drawable/ic_work_azul"-->
-        <!--android:title="Meus Anúncios" />-->
+    <!--android:icon="@drawable/ic_work_azul"-->
+    <!--android:title="Meus Anúncios" />-->
 
 </menu>

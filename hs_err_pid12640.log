@@ -24,10 +24,10 @@
 
 ---------------  T H R E A D  ---------------
 
-Current thread (0x000000001667b800):  JavaThread "C2 CompilerThread1" daemon [_thread_in_native, id=7324, stack(0x0000000017df0000,0x0000000017ef0000)]
+Current thread (0x000000001667b800):  JavaThread "C2 CompilerThread1" daemon [_thread_in_native, idPostagem=7324, stack(0x0000000017df0000,0x0000000017ef0000)]
 
 Stack: [0x0000000017df0000,0x0000000017ef0000]
-[error occurred during error reporting (printing stack bounds), id 0xc0000005]
+[error occurred during error reporting (printing stack bounds), idPostagem 0xc0000005]
 
 Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
 
@@ -39,40 +39,40 @@ C2:  13086 5135       4       java.lang.Class::privateGetMethodRecursive (130 by
 ---------------  P R O C E S S  ---------------
 
 Java Threads: ( => current thread )
-  0x000000001893d800 JavaThread "Cache worker for Build Output Cleanup Cache (C:\Git\CollabMeiApp\.gradle\buildOutputCleanup)" [_thread_blocked, id=9724, stack(0x0000000022120000,0x0000000022220000)]
-  0x000000001893c800 JavaThread "Build operations Thread 4" [_thread_blocked, id=2032, stack(0x0000000021e20000,0x0000000021f20000)]
-  0x0000000018939000 JavaThread "Build operations Thread 3" [_thread_blocked, id=9044, stack(0x0000000020d20000,0x0000000020e20000)]
-  0x0000000018938000 JavaThread "Build operations Thread 2" [_thread_blocked, id=13120, stack(0x0000000020c20000,0x0000000020d20000)]
-  0x000000001992e800 JavaThread "Build operations" [_thread_blocked, id=11440, stack(0x0000000020b20000,0x0000000020c20000)]
-  0x0000000019935800 JavaThread "Cache worker for execution history cache (C:\Users\renan\.gradle\caches\5.1.1\executionHistory)" [_thread_blocked, id=5504, stack(0x0000000020230000,0x0000000020330000)]
-  0x0000000019934800 JavaThread "Cache worker for cache directory md-rule (C:\Users\renan\.gradle\caches\5.1.1\md-rule)" [_thread_blocked, id=10684, stack(0x000000001fc00000,0x000000001fd00000)]
-  0x0000000019932800 JavaThread "Cache worker for cache directory md-supplier (C:\Users\renan\.gradle\caches\5.1.1\md-supplier)" [_thread_blocked, id=832, stack(0x000000001fb00000,0x000000001fc00000)]
-  0x0000000019930000 JavaThread "Cache worker for file hash cache (C:\Git\CollabMeiApp\.gradle\5.1.1\fileHashes)" [_thread_blocked, id=7600, stack(0x000000001d400000,0x000000001d500000)]
-  0x000000001992f800 JavaThread "Cache worker for journal cache (C:\Users\renan\.gradle\caches\journal-1)" [_thread_blocked, id=11580, stack(0x000000001b160000,0x000000001b260000)]
-  0x000000001994a000 JavaThread "File lock request listener" [_thread_in_native, id=13264, stack(0x000000001b060000,0x000000001b160000)]
-  0x0000000019917800 JavaThread "Cache worker for file hash cache (C:\Users\renan\.gradle\caches\5.1.1\fileHashes)" [_thread_blocked, id=11612, stack(0x000000001af60000,0x000000001b060000)]
-  0x00000000197cf000 JavaThread "Thread-8" [_thread_blocked, id=13624, stack(0x000000001ae60000,0x000000001af60000)]
-  0x00000000197e3800 JavaThread "Stdin handler" [_thread_blocked, id=10200, stack(0x000000001ad60000,0x000000001ae60000)]
-  0x00000000197de800 JavaThread "Asynchronous log dispatcher for DefaultDaemonConnection: socket connection from /127.0.0.1:50618 to /127.0.0.1:50619" [_thread_blocked, id=1492, stack(0x000000001ac60000,0x000000001ad60000)]
-  0x0000000019400800 JavaThread "Daemon worker" [_thread_blocked, id=10052, stack(0x000000001ab60000,0x000000001ac60000)]
-  0x00000000193ff000 JavaThread "Cancel handler" [_thread_blocked, id=2220, stack(0x000000001aa60000,0x000000001ab60000)]
-  0x000000001940a800 JavaThread "Handler for socket connection from /127.0.0.1:50618 to /127.0.0.1:50619" [_thread_in_native, id=8596, stack(0x000000001a760000,0x000000001a860000)]
-  0x0000000019403000 JavaThread "Daemon" [_thread_blocked, id=13192, stack(0x000000001a660000,0x000000001a760000)]
-  0x0000000019402000 JavaThread "Daemon periodic checks" [_thread_blocked, id=5548, stack(0x000000001a560000,0x000000001a660000)]
-  0x000000001945c000 JavaThread "Incoming local TCP Connector on port 50618" [_thread_in_native, id=8788, stack(0x000000001a300000,0x000000001a400000)]
-  0x0000000018018800 JavaThread "Service Thread" daemon [_thread_blocked, id=6632, stack(0x00000000183f0000,0x00000000184f0000)]
-  0x000000001668a800 JavaThread "C1 CompilerThread2" daemon [_thread_blocked, id=9996, stack(0x0000000017ef0000,0x0000000017ff0000)]
-=>0x000000001667b800 JavaThread "C2 CompilerThread1" daemon [_thread_in_native, id=7324, stack(0x0000000017df0000,0x0000000017ef0000)]
-  0x0000000016688000 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=1112, stack(0x0000000017cf0000,0x0000000017df0000)]
-  0x0000000016687000 JavaThread "Attach Listener" daemon [_thread_blocked, id=7420, stack(0x0000000017bf0000,0x0000000017cf0000)]
-  0x0000000016686000 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=13808, stack(0x0000000017af0000,0x0000000017bf0000)]
-  0x0000000002d0d000 JavaThread "Finalizer" daemon [_thread_blocked, id=6536, stack(0x00000000178e0000,0x00000000179e0000)]
-  0x0000000002d02800 JavaThread "Reference Handler" daemon [_thread_blocked, id=12604, stack(0x00000000177e0000,0x00000000178e0000)]
-  0x0000000002c0e000 JavaThread "main" [_thread_blocked, id=12548, stack(0x0000000002a30000,0x0000000002b30000)]
+  0x000000001893d800 JavaThread "Cache worker for Build Output Cleanup Cache (C:\Git\CollabMeiApp\.gradle\buildOutputCleanup)" [_thread_blocked, idPostagem=9724, stack(0x0000000022120000,0x0000000022220000)]
+  0x000000001893c800 JavaThread "Build operations Thread 4" [_thread_blocked, idPostagem=2032, stack(0x0000000021e20000,0x0000000021f20000)]
+  0x0000000018939000 JavaThread "Build operations Thread 3" [_thread_blocked, idPostagem=9044, stack(0x0000000020d20000,0x0000000020e20000)]
+  0x0000000018938000 JavaThread "Build operations Thread 2" [_thread_blocked, idPostagem=13120, stack(0x0000000020c20000,0x0000000020d20000)]
+  0x000000001992e800 JavaThread "Build operations" [_thread_blocked, idPostagem=11440, stack(0x0000000020b20000,0x0000000020c20000)]
+  0x0000000019935800 JavaThread "Cache worker for execution history cache (C:\Users\renan\.gradle\caches\5.1.1\executionHistory)" [_thread_blocked, idPostagem=5504, stack(0x0000000020230000,0x0000000020330000)]
+  0x0000000019934800 JavaThread "Cache worker for cache directory md-rule (C:\Users\renan\.gradle\caches\5.1.1\md-rule)" [_thread_blocked, idPostagem=10684, stack(0x000000001fc00000,0x000000001fd00000)]
+  0x0000000019932800 JavaThread "Cache worker for cache directory md-supplier (C:\Users\renan\.gradle\caches\5.1.1\md-supplier)" [_thread_blocked, idPostagem=832, stack(0x000000001fb00000,0x000000001fc00000)]
+  0x0000000019930000 JavaThread "Cache worker for file hash cache (C:\Git\CollabMeiApp\.gradle\5.1.1\fileHashes)" [_thread_blocked, idPostagem=7600, stack(0x000000001d400000,0x000000001d500000)]
+  0x000000001992f800 JavaThread "Cache worker for journal cache (C:\Users\renan\.gradle\caches\journal-1)" [_thread_blocked, idPostagem=11580, stack(0x000000001b160000,0x000000001b260000)]
+  0x000000001994a000 JavaThread "File lock request listener" [_thread_in_native, idPostagem=13264, stack(0x000000001b060000,0x000000001b160000)]
+  0x0000000019917800 JavaThread "Cache worker for file hash cache (C:\Users\renan\.gradle\caches\5.1.1\fileHashes)" [_thread_blocked, idPostagem=11612, stack(0x000000001af60000,0x000000001b060000)]
+  0x00000000197cf000 JavaThread "Thread-8" [_thread_blocked, idPostagem=13624, stack(0x000000001ae60000,0x000000001af60000)]
+  0x00000000197e3800 JavaThread "Stdin handler" [_thread_blocked, idPostagem=10200, stack(0x000000001ad60000,0x000000001ae60000)]
+  0x00000000197de800 JavaThread "Asynchronous log dispatcher for DefaultDaemonConnection: socket connection from /127.0.0.1:50618 to /127.0.0.1:50619" [_thread_blocked, idPostagem=1492, stack(0x000000001ac60000,0x000000001ad60000)]
+  0x0000000019400800 JavaThread "Daemon worker" [_thread_blocked, idPostagem=10052, stack(0x000000001ab60000,0x000000001ac60000)]
+  0x00000000193ff000 JavaThread "Cancel handler" [_thread_blocked, idPostagem=2220, stack(0x000000001aa60000,0x000000001ab60000)]
+  0x000000001940a800 JavaThread "Handler for socket connection from /127.0.0.1:50618 to /127.0.0.1:50619" [_thread_in_native, idPostagem=8596, stack(0x000000001a760000,0x000000001a860000)]
+  0x0000000019403000 JavaThread "Daemon" [_thread_blocked, idPostagem=13192, stack(0x000000001a660000,0x000000001a760000)]
+  0x0000000019402000 JavaThread "Daemon periodic checks" [_thread_blocked, idPostagem=5548, stack(0x000000001a560000,0x000000001a660000)]
+  0x000000001945c000 JavaThread "Incoming local TCP Connector on port 50618" [_thread_in_native, idPostagem=8788, stack(0x000000001a300000,0x000000001a400000)]
+  0x0000000018018800 JavaThread "Service Thread" daemon [_thread_blocked, idPostagem=6632, stack(0x00000000183f0000,0x00000000184f0000)]
+  0x000000001668a800 JavaThread "C1 CompilerThread2" daemon [_thread_blocked, idPostagem=9996, stack(0x0000000017ef0000,0x0000000017ff0000)]
+=>0x000000001667b800 JavaThread "C2 CompilerThread1" daemon [_thread_in_native, idPostagem=7324, stack(0x0000000017df0000,0x0000000017ef0000)]
+  0x0000000016688000 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, idPostagem=1112, stack(0x0000000017cf0000,0x0000000017df0000)]
+  0x0000000016687000 JavaThread "Attach Listener" daemon [_thread_blocked, idPostagem=7420, stack(0x0000000017bf0000,0x0000000017cf0000)]
+  0x0000000016686000 JavaThread "Signal Dispatcher" daemon [_thread_blocked, idPostagem=13808, stack(0x0000000017af0000,0x0000000017bf0000)]
+  0x0000000002d0d000 JavaThread "Finalizer" daemon [_thread_blocked, idPostagem=6536, stack(0x00000000178e0000,0x00000000179e0000)]
+  0x0000000002d02800 JavaThread "Reference Handler" daemon [_thread_blocked, idPostagem=12604, stack(0x00000000177e0000,0x00000000178e0000)]
+  0x0000000002c0e000 JavaThread "main" [_thread_blocked, idPostagem=12548, stack(0x0000000002a30000,0x0000000002b30000)]
 
 Other Threads:
-  0x0000000016645800 VMThread [stack: 0x00000000176e0000,0x00000000177e0000] [id=1704]
-  0x00000000166b0000 WatcherThread [stack: 0x00000000184f0000,0x00000000185f0000] [id=5948]
+  0x0000000016645800 VMThread [stack: 0x00000000176e0000,0x00000000177e0000] [idPostagem=1704]
+  0x00000000166b0000 WatcherThread [stack: 0x00000000184f0000,0x00000000185f0000] [idPostagem=5948]
 
 VM state:at safepoint (normal execution)
 

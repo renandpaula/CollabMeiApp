@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <item android:id="@+id/meus_anuncios"
-                    android:title="Meus Anúncios"
-                    app:showAsAction="always"
-                    android:icon="@drawable/ic_meus_anuncios_azul" />
+            android:title="Meus Anúncios"
+            app:showAsAction="always"
+            android:icon="@drawable/ic_meus_anuncios_azul" />
 
         <item android:id="@+id/menu_sair"
             android:title="Deslogar" />

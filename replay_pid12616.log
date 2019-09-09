@@ -774,7 +774,7 @@ instanceKlass org/gradle/cache/internal/CleanupActionFactory
 instanceKlass org/gradle/api/internal/FeaturePreviews
 instanceKlass org/gradle/api/internal/attributes/DefaultImmutableAttributesFactory
 instanceKlass org/gradle/api/internal/attributes/ImmutableAttributesFactory
-instanceKlass org/gradle/internal/scopeids/id/ScopeId
+instanceKlass org/gradle/internal/scopeids/idPostagem/ScopeId
 instanceKlass org/gradle/internal/scopeids/PersistentScopeIdLoader
 instanceKlass org/gradle/internal/fingerprint/classpath/CompileClasspathFingerprinter
 instanceKlass org/gradle/internal/work/AsyncWorkTracker
@@ -1241,7 +1241,7 @@ instanceKlass org/gradle/launcher/daemon/registry/PersistentDaemonRegistry
 instanceKlass org/gradle/cache/internal/CacheAccessSerializer$1
 instanceKlass org/gradle/launcher/daemon/registry/DaemonRegistryServices$1
 instanceKlass java/util/Random
-instanceKlass org/gradle/internal/id/RandomLongIdGenerator
+instanceKlass org/gradle/internal/idPostagem/RandomLongIdGenerator
 instanceKlass org/gradle/cache/internal/DefaultProcessMetaDataProvider
 instanceKlass org/gradle/cache/FileLock
 instanceKlass org/gradle/cache/FileAccess
@@ -1275,7 +1275,7 @@ instanceKlass org/gradle/launcher/exec/BuildActionParameters
 instanceKlass org/gradle/launcher/daemon/protocol/DaemonMessageSerializer$BuildActionParametersSerializer
 instanceKlass org/gradle/launcher/daemon/protocol/DaemonMessageSerializer$BuildSerializer
 instanceKlass org/gradle/launcher/daemon/protocol/DaemonMessageSerializer
-instanceKlass org/gradle/internal/id/UUIDGenerator
+instanceKlass org/gradle/internal/idPostagem/UUIDGenerator
 instanceKlass org/gradle/internal/remote/MessagingClient
 instanceKlass org/gradle/internal/remote/internal/OutgoingConnector
 instanceKlass org/gradle/internal/remote/internal/IncomingConnector
@@ -1442,7 +1442,7 @@ instanceKlass org/gradle/internal/execution/timeout/TimeoutHandler
 instanceKlass org/gradle/cache/internal/FileContentCacheFactory
 instanceKlass org/gradle/internal/snapshot/FileSystemMirror
 instanceKlass org/gradle/process/internal/worker/WorkerProcessFactory
-instanceKlass org/gradle/internal/id/IdGenerator
+instanceKlass org/gradle/internal/idPostagem/IdGenerator
 instanceKlass org/gradle/internal/hash/FileHasher
 instanceKlass org/gradle/initialization/RootBuildLifecycleListener
 instanceKlass org/gradle/api/internal/changedetection/state/FileTimeStampInspector

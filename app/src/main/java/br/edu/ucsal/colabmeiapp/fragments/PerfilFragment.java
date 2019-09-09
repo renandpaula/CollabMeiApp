@@ -73,7 +73,7 @@ public class PerfilFragment extends Fragment {
 
         //configura ref postagens usuario
         postagensUsuarioRef = FirebaseConfig.getFirebaseDatabase()
-                .child("publicacoes")
+                .child("postagens")
                 .child(usuarioLogado.getId());
 
         //iniciar componentes
@@ -112,8 +112,10 @@ public class PerfilFragment extends Fragment {
 
     private void aplicaFotoPerfil(){
 
+        usuarioLogado =  UsuarioFirebase.getDadosUsuariologado();
+
         String caminhoFoto = usuarioLogado.getCaminhoFoto();
-        if(caminhoFoto != null){
+        if(!caminhoFoto.equals("")){
             Uri url = Uri.parse(caminhoFoto);
             Glide.with(getActivity())
                     .load(url)
@@ -141,7 +143,7 @@ public class PerfilFragment extends Fragment {
                 }
 
                 //configurar adatper
-                adapterGrid = new AdapterGrid(getActivity(), R.layout.grid_publicacoes, urlFotos);
+                adapterGrid = new AdapterGrid(getContext(), R.layout.grid_publicacoes, urlFotos);
                 gridViewPerfil.setAdapter(adapterGrid);
 
             }
@@ -156,7 +158,7 @@ public class PerfilFragment extends Fragment {
 
     public void inicializarImageLoader() {
         ImageLoaderConfiguration config = new ImageLoaderConfiguration
-                .Builder(getActivity())
+                .Builder(getContext())
                 .memoryCache(new LruMemoryCache(2 * 1024 * 1024))
                 .memoryCacheSize(2 * 1024 * 1024)
                 .diskCacheSize(50 * 1024 * 1024)
@@ -204,6 +206,13 @@ public class PerfilFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        recuperarDadosDoUsuarioLogado();
+        aplicaFotoPerfil();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         recuperarDadosDoUsuarioLogado();
         aplicaFotoPerfil();
     }

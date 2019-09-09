@@ -97,14 +97,14 @@ public class ColaborativoFragment extends Fragment {
         limparFiltros.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), PrincipalActivity.class));
+                startActivity(new Intent(getContext(), PrincipalActivity.class));
                 getActivity().finish();
             }
         });
 
 
         //Config do recycler view
-        recyclerAnunciosPublicos.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerAnunciosPublicos.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerAnunciosPublicos.setHasFixedSize(true);
         adapterAnuncios =  new AdapterAnuncios(listaAnuncios, getActivity());
         recyclerAnunciosPublicos.setAdapter(adapterAnuncios);
@@ -117,7 +117,7 @@ public class ColaborativoFragment extends Fragment {
                     @Override
                     public void onItemClick(View view, int position) {
                         Anuncio anuncioSelecionado = listaAnuncios.get(position);
-                        Intent i = new Intent(getActivity(), AnunciosDetalhesActivity.class);
+                        Intent i = new Intent(getContext(), AnunciosDetalhesActivity.class);
                         i.putExtra("anuncioSelecionado", anuncioSelecionado);
                         startActivity(i);
 
@@ -140,7 +140,7 @@ public class ColaborativoFragment extends Fragment {
 
     public void filtroPorRegiao(View view){
 
-        AlertDialog.Builder dialogRegiao = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder dialogRegiao = new AlertDialog.Builder(getContext());
         dialogRegiao.setTitle("Selecione a região desejada");
 
         //configurar spinner do dialog
@@ -148,7 +148,7 @@ public class ColaborativoFragment extends Fragment {
         final Spinner spinnerRegiao = viewSpinner.findViewById(R.id.spinnerFiltro);
         String[] regiao = getResources().getStringArray(R.array.regiao);
         ArrayAdapter<String> adapterR = new ArrayAdapter<String>(
-                getActivity(), android.R.layout.simple_spinner_item,
+                getContext(), android.R.layout.simple_spinner_item,
                 regiao
         );
         adapterR.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -184,7 +184,7 @@ public class ColaborativoFragment extends Fragment {
 
         if (filtrandoPorRegiao == true){
 
-            AlertDialog.Builder dialogCategoria = new AlertDialog.Builder(getActivity());
+            AlertDialog.Builder dialogCategoria = new AlertDialog.Builder(getContext());
             dialogCategoria.setTitle("Selecione a categoria desejada");
 
             //configurar spinner do dialog
@@ -192,7 +192,7 @@ public class ColaborativoFragment extends Fragment {
             final Spinner spinnerCategoria = viewSpinner.findViewById(R.id.spinnerFiltro);
             String[] categorias = getResources().getStringArray(R.array.categorias);
             ArrayAdapter<String> adapterR = new ArrayAdapter<String>(
-                    getActivity(), android.R.layout.simple_spinner_item,
+                    getContext(), android.R.layout.simple_spinner_item,
                     categorias
             );
             adapterR.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -219,7 +219,7 @@ public class ColaborativoFragment extends Fragment {
             dialog.show();
 
         } else {
-            Toast.makeText(getActivity(), "Escolha primeiro uma região!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Escolha primeiro uma região!", Toast.LENGTH_SHORT).show();
         }
 
 

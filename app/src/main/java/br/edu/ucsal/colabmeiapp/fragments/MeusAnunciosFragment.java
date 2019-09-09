@@ -28,6 +28,7 @@ import br.edu.ucsal.colabmeiapp.activity.CadastrarAnuncioActivity;
 import br.edu.ucsal.colabmeiapp.adapter.AdapterAnuncios;
 import br.edu.ucsal.colabmeiapp.config.FirebaseConfig;
 import br.edu.ucsal.colabmeiapp.helper.RecyclerItemClickListener;
+import br.edu.ucsal.colabmeiapp.helper.UsuarioFirebase;
 import br.edu.ucsal.colabmeiapp.model.Anuncio;
 import dmax.dialog.SpotsDialog;
 
@@ -58,21 +59,21 @@ public class MeusAnunciosFragment extends Fragment {
         recyclerAnuncios = view.findViewById(R.id.recyclerAnuncios);
         anuncioUsuarioRef = FirebaseConfig.getFirebaseDatabase()
                 .child("meus anuncios")
-                .child(FirebaseConfig.getIdUsuario());
+                .child(UsuarioFirebase.getIdentificadorUsuario());
 
 
         FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), CadastrarAnuncioActivity.class));
+                startActivity(new Intent(getContext(), CadastrarAnuncioActivity.class));
             }
         });
 
         //Config do recycler view
-        recyclerAnuncios.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerAnuncios.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerAnuncios.setHasFixedSize(true);
-        adapterAnuncios =  new AdapterAnuncios(anuncios, getActivity());
+        adapterAnuncios =  new AdapterAnuncios(anuncios, getContext());
         recyclerAnuncios.setAdapter(adapterAnuncios);
 
         //Recupera anuncios do usuario
@@ -81,7 +82,7 @@ public class MeusAnunciosFragment extends Fragment {
         //Adicionar evento de clique no recyclerview
         recyclerAnuncios.addOnItemTouchListener(
                 new RecyclerItemClickListener(
-                        getActivity(),
+                        getContext(),
                         recyclerAnuncios,
                         new RecyclerItemClickListener.OnItemClickListener() {
                             @Override
@@ -96,7 +97,7 @@ public class MeusAnunciosFragment extends Fragment {
 
                                 final Anuncio anuncioSelecionado = anuncios.get(position);
 
-                                AlertDialog.Builder dialogExcluir = new AlertDialog.Builder(getActivity());
+                                AlertDialog.Builder dialogExcluir = new AlertDialog.Builder(getContext());
 
                                 //configura o titulo da mensagem
                                 dialogExcluir.setTitle("Confirmar exclusão");
@@ -106,7 +107,7 @@ public class MeusAnunciosFragment extends Fragment {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         anuncioSelecionado.remover();
-                                        Toast.makeText(getActivity(), "Anúncio deletado com sucesso!",
+                                        Toast.makeText(getContext(), "Anúncio deletado com sucesso!",
                                                 Toast.LENGTH_SHORT).show();
                                     }
                                 });
@@ -137,7 +138,7 @@ public class MeusAnunciosFragment extends Fragment {
     private void recuperarAnuncios(){
 
         dialog = new SpotsDialog.Builder()
-                .setContext(getActivity())
+                .setContext(getContext())
                 .setMessage("Carregando Anúncios")
                 .setCancelable(false)
                 .build();

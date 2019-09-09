@@ -65,7 +65,7 @@ public class PublicarFragment extends Fragment {
         buttonNovoAnuncio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), CadastrarAnuncioActivity.class));
+                startActivity(new Intent(getContext(), CadastrarAnuncioActivity.class));
             }
         });
 

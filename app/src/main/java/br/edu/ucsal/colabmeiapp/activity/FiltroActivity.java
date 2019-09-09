@@ -41,6 +41,7 @@ import br.edu.ucsal.colabmeiapp.R;
 import br.edu.ucsal.colabmeiapp.adapter.AdapterThumbnails;
 import br.edu.ucsal.colabmeiapp.config.FirebaseConfig;
 import br.edu.ucsal.colabmeiapp.helper.RecyclerItemClickListener;
+import br.edu.ucsal.colabmeiapp.helper.UsuarioFirebase;
 import br.edu.ucsal.colabmeiapp.model.Publicacao;
 import br.edu.ucsal.colabmeiapp.model.Usuario;
 import dmax.dialog.SpotsDialog;
@@ -76,8 +77,8 @@ public class FiltroActivity extends AppCompatActivity {
         //configs iniciais
         listaFiltros = new ArrayList<>();
         firebaseRef = FirebaseConfig.getFirebaseDatabase();
-        usuariosRef = firebaseRef.child("usuarios");
-        idUsuarioLogado = FirebaseConfig.getIdUsuario();
+        usuariosRef = FirebaseConfig.getFirebaseDatabase().child("usuarios");
+        idUsuarioLogado = UsuarioFirebase.getIdentificadorUsuario();
 
 
         //inicializar componentes
@@ -147,18 +148,18 @@ public class FiltroActivity extends AppCompatActivity {
 
     private void recuperarDadosPostagem() {
         carregando(true);
-        usuarioLogadoRef = usuariosRef.child(idUsuarioLogado);
+        usuarioLogadoRef = usuariosRef.child( idUsuarioLogado );
         usuarioLogadoRef.addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
                         //Recupera os dados do usuario logado
-                        usuarioLogado = dataSnapshot.getValue(Usuario.class);
+                        usuarioLogado = dataSnapshot.getValue( Usuario.class );
 
                         //Recupera seguidores
                         DatabaseReference seguidoresRef = firebaseRef
-                                .child("seguidores")
+                                .child( "seguidores" )
                                 .child( idUsuarioLogado );
                         seguidoresRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -254,7 +255,7 @@ public class FiltroActivity extends AppCompatActivity {
 
             final Publicacao publicacao = new Publicacao();
             publicacao.setIdUsuario(idUsuarioLogado);
-            publicacao.setDescricao(textDescricaoFiltro.getText().toString());
+            publicacao.setDescricao( textDescricaoFiltro.getText().toString() );
 
             //recupera dados da imagem
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -265,10 +266,10 @@ public class FiltroActivity extends AppCompatActivity {
             StorageReference storageRef = FirebaseConfig.getFirebaseStorage();
             StorageReference imagemRef = storageRef
                     .child("imagens")
-                    .child("publicacoes")
-                    .child(publicacao.getId() + ".jpeg");
+                    .child("postagens")
+                    .child( publicacao.getId() + ".jpeg");
 
-            UploadTask uploadTask = imagemRef.putBytes(dadosImagem);
+            UploadTask uploadTask = imagemRef.putBytes( dadosImagem );
             uploadTask.addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
@@ -283,7 +284,7 @@ public class FiltroActivity extends AppCompatActivity {
 
                     //Recupera local da foto
                     Uri url = taskSnapshot.getDownloadUrl();
-                    publicacao.setCaminhoFoto(url.toString());
+                    publicacao.setCaminhoFoto( url.toString() );
 
                     //atualizar qtd de postagens
                     int qtdPostagem = usuarioLogado.getPostagens() + 1;
@@ -291,7 +292,7 @@ public class FiltroActivity extends AppCompatActivity {
                     usuarioLogado.atualizarQtdPostagens();
 
                     //salvar postagem
-                    if (publicacao.salvar(seguidoresSnapshot)) {
+                    if (publicacao.salvar( seguidoresSnapshot )) {
 
                         Toast.makeText(FiltroActivity.this,
                                 "Publicação realizada!",

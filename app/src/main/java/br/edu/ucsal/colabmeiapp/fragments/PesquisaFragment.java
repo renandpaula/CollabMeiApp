@@ -27,6 +27,7 @@ import br.edu.ucsal.colabmeiapp.activity.PerfilAmigoActivity;
 import br.edu.ucsal.colabmeiapp.adapter.AdapterPesquisa;
 import br.edu.ucsal.colabmeiapp.config.FirebaseConfig;
 import br.edu.ucsal.colabmeiapp.helper.RecyclerItemClickListener;
+import br.edu.ucsal.colabmeiapp.helper.UsuarioFirebase;
 import br.edu.ucsal.colabmeiapp.model.Usuario;
 
 /**
@@ -60,15 +61,15 @@ public class PesquisaFragment extends Fragment {
 
         //configs iniciais
         listaUsuarios =  new ArrayList<>();
-        idUsuarioLogado = FirebaseConfig.getIdUsuario();
+        idUsuarioLogado = UsuarioFirebase.getIdentificadorUsuario();
         usuariosRef = FirebaseConfig.getFirebaseDatabase()
                 .child("usuarios");
 
         //configura recyclerview
         recyclerViewPesquisa.setHasFixedSize(true);
-        recyclerViewPesquisa.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerViewPesquisa.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        adapterPesquisa = new AdapterPesquisa(listaUsuarios, getActivity());
+        adapterPesquisa = new AdapterPesquisa(listaUsuarios, getContext());
         recyclerViewPesquisa.setAdapter(adapterPesquisa);
 
         //configura evento de clique
@@ -80,7 +81,7 @@ public class PesquisaFragment extends Fragment {
                     public void onItemClick(View view, int position) {
 
                         Usuario usuarioSelecionado = listaUsuarios.get(position);
-                        Intent i = new Intent(getActivity(), PerfilAmigoActivity.class);
+                        Intent i = new Intent(getContext(), PerfilAmigoActivity.class);
                         i.putExtra("usuarioSelecionado", usuarioSelecionado);
                         startActivity(i);
                     }

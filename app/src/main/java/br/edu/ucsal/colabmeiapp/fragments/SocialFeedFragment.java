@@ -21,6 +21,7 @@ import java.util.List;
 import br.edu.ucsal.colabmeiapp.R;
 import br.edu.ucsal.colabmeiapp.adapter.AdapterFeed;
 import br.edu.ucsal.colabmeiapp.config.FirebaseConfig;
+import br.edu.ucsal.colabmeiapp.helper.UsuarioFirebase;
 import br.edu.ucsal.colabmeiapp.model.Feed;
 
 /**
@@ -48,10 +49,10 @@ public class SocialFeedFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_social_feed, container, false);
 
         //configuracoes iniciais
-        idUsuarioLogado = FirebaseConfig.getIdUsuario();
+        idUsuarioLogado = UsuarioFirebase.getIdentificadorUsuario();
         feedRef = FirebaseConfig.getFirebaseDatabase()
                 .child("feed")
-                .child(idUsuarioLogado);
+                .child( idUsuarioLogado );
 
         //inicializar componentes
 

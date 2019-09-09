@@ -20,6 +20,10 @@ public class UsuarioFirebase {
         return usuario.getCurrentUser();
     }
 
+    public static String getIdentificadorUsuario(){
+        return getUsuarioLogado().getUid();
+    }
+
 
 
     public static void atualizarNomeUsuario(String nome){
@@ -33,7 +37,7 @@ public class UsuarioFirebase {
             //configura objeto para alterar perfil
             UserProfileChangeRequest profile =  new UserProfileChangeRequest
                     .Builder()
-                    .setDisplayName(nome)
+                    .setDisplayName( nome )
                     .build();
             usuarioLogado.updateProfile( profile ).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
@@ -56,15 +60,15 @@ public class UsuarioFirebase {
         try {
 
             //usuario logado
-            FirebaseUser usuarioLogado = FirebaseConfig.getUsuarioAtual();
+            FirebaseUser usuarioLogado = getUsuarioLogado();
 
             //configura objeto para alterar perfil
             UserProfileChangeRequest profile =  new UserProfileChangeRequest
                     .Builder()
-                    .setPhotoUri(url)
+                    .setPhotoUri( url )
                     .build();
 
-            usuarioLogado.updateProfile(profile).addOnCompleteListener(new OnCompleteListener<Void>() {
+            usuarioLogado.updateProfile( profile ).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (!task.isSuccessful()){
@@ -79,17 +83,17 @@ public class UsuarioFirebase {
     }
 
     public static Usuario getDadosUsuariologado(){
-        FirebaseUser firebaseUser = FirebaseConfig.getUsuarioAtual();
+        FirebaseUser firebaseUser = getUsuarioLogado();
 
         Usuario usuario = new Usuario();
-        usuario.setEmail(firebaseUser.getEmail());
-        usuario.setNomeXrazao(firebaseUser.getDisplayName());
-        usuario.setId(firebaseUser.getUid());
+        usuario.setEmail( firebaseUser.getEmail() );
+        usuario.setNomeXrazao( firebaseUser.getDisplayName() );
+        usuario.setId( firebaseUser.getUid() );
 
         if(firebaseUser.getPhotoUrl() == null){
             usuario.setCaminhoFoto("");
         }else{
-            usuario.setCaminhoFoto(firebaseUser.getPhotoUrl().toString());
+            usuario.setCaminhoFoto( firebaseUser.getPhotoUrl().toString() );
         }
         return usuario;
     }
