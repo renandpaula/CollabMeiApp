@@ -69,6 +69,7 @@ public class SocialFeedFragment extends Fragment {
 
     private void recuperarFeed(){
 
+        listaFeed.clear();
         valueEventListenerFeed = feedRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -92,6 +93,7 @@ public class SocialFeedFragment extends Fragment {
         super.onStart();
         recuperarFeed();
     }
+
 
     @Override
     public void onStop() {

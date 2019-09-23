@@ -72,6 +72,7 @@ public class AdapterFeed extends RecyclerView.Adapter<AdapterFeed.MyViewHolder> 
                 Intent i = new Intent(context, ComentariosActivity.class);
                 i.putExtra("idPostagem", feed.getIdPostagem() );
                 context.startActivity( i );
+
             }
         });
 
