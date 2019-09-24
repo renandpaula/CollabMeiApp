@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -141,6 +142,9 @@ public class PublicarFragment extends Fragment {
 
     private void startCropImageActivity(Uri imageUri) {
         CropImage.activity(imageUri)
+                .setMinCropResultSize(1000,1000)
+                .setFixAspectRatio(true)
+                .setRequestedSize(2000, 2000, CropImageView.RequestSizeOptions.RESIZE_INSIDE)
                 .start(getContext(),this);
 
     }
