@@ -75,6 +75,31 @@ public class Publicacao implements Serializable {
         return true;
     }
 
+
+//    public void remover(){
+//        String idUsuarioLogado = UsuarioFirebase.getIdentificadorUsuario();
+//        setIdUsuario(idUsuarioLogado);
+//        DatabaseReference publicacaoRef = FirebaseConfig.getFirebaseDatabase()
+//                .child("postagens")
+//                .child(getIdUsuario())
+//                .child(getId());
+//        publicacaoRef.removeValue();
+//        removerFeed();
+//    }
+//
+//    public void removerFeed(){
+//        String idUsuarioLogado = UsuarioFirebase.getIdentificadorUsuario();
+//        setIdUsuario(idUsuarioLogado);
+//        DatabaseReference publicacaoRef = FirebaseConfig.getFirebaseDatabase()
+//                .child("postagens")
+//                .child(getIdUsuario())
+//                .child(getId());
+//        publicacaoRef.removeValue();
+//        removerAnuncioPublico();
+//    }
+
+
+
     public String getId() {
         return id;
     }

@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ProgressBar;
@@ -28,6 +29,7 @@ import java.util.List;
 
 import br.edu.ucsal.colabmeiapp.R;
 import br.edu.ucsal.colabmeiapp.activity.EditarPerfilActivity;
+import br.edu.ucsal.colabmeiapp.activity.VisualizarPublicacaoActivity;
 import br.edu.ucsal.colabmeiapp.adapter.AdapterGrid;
 import br.edu.ucsal.colabmeiapp.config.FirebaseConfig;
 import br.edu.ucsal.colabmeiapp.helper.UsuarioFirebase;
@@ -52,6 +54,7 @@ public class PerfilFragment extends Fragment {
     private DatabaseReference postagensUsuarioRef;
     private ValueEventListener valueEventListenerPerfil;
     private AdapterGrid adapterGrid;
+    private List<Publicacao> publicacoes;
 
 
     public PerfilFragment() {
@@ -105,6 +108,20 @@ public class PerfilFragment extends Fragment {
         //carrega fotos postagem
         carregaFotosPostagem();
 
+        //abrir foto clicada
+        gridViewPerfil.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Publicacao publicacao = publicacoes.get(position);
+                Intent i = new Intent(getActivity(), VisualizarPublicacaoActivity.class);
+                i.putExtra("postagem", publicacao);
+                i.putExtra("usuario", usuarioLogado);
+
+                startActivity(i);
+
+            }
+        });
+
 
 
         return view;
@@ -128,6 +145,7 @@ public class PerfilFragment extends Fragment {
     public void carregaFotosPostagem(){
 
         //recupera fotos postadas pelo user
+        publicacoes = new ArrayList<>();
         postagensUsuarioRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -139,6 +157,7 @@ public class PerfilFragment extends Fragment {
                 List<String> urlFotos = new ArrayList<>();
                 for (DataSnapshot ds : dataSnapshot.getChildren()){
                     Publicacao publicacao = ds.getValue(Publicacao.class);
+                    publicacoes.add(publicacao);
                     urlFotos.add(publicacao.getCaminhoFoto());
                 }
 
