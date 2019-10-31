@@ -3,9 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="br.edu.ucsal.colabmeiapp">
 
+    <!-- Beware that these values are overridden by the build.gradle file -->
+
     <uses-feature
-        android:name="android.hardware.camera2"
+        android:name="android.hardware.camera"
         android:required="true" /> <!-- Permissões Internet -->
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Permissões de Galeria e Câmera -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
