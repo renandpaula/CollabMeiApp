@@ -70,12 +70,15 @@ public class CadastroActivity extends AppCompatActivity {
                     layoutRazao.setVisibility(View.VISIBLE);
                     layoutCPF.setVisibility(View.GONE);
                     layoutCNPJ.setVisibility(View.VISIBLE);
+                    limpaCampos();
                     campoRazao.requestFocus();
+
                 } else {
                     layoutNome.setVisibility(View.VISIBLE);
                     layoutRazao.setVisibility(View.GONE);
                     layoutCPF.setVisibility(View.VISIBLE);
                     layoutCNPJ.setVisibility(View.GONE);
+                    limpaCampos();
                     campoNome.requestFocus();
                 }
             }
@@ -84,8 +87,20 @@ public class CadastroActivity extends AppCompatActivity {
 
     }
 
+    private void limpaCampos() {
+        campoNome.getText().clear();
+        campoRazao.getText().clear();
+        campoCPF.getText().clear();
+        campoCNPJ.getText().clear();
+        campoTelefone.getText().clear();
+        campoEndereco.getText().clear();
+        campoEmail.getText().clear();
+        campoSenha.getText().clear();
+        campoConfirmaSenha.getText().clear();
+    }
 
-        public void validarCadastroUsuario(View view){
+
+    public void validarCadastroUsuario(View view){
 
             //Recuperar textos digitados pelo usuario
             String textoNome = campoNome.getText().toString();
@@ -105,7 +120,7 @@ public class CadastroActivity extends AppCompatActivity {
             //Verifica se o cadastro é de pessoa juridica
             if (switchTipoUsuario.isChecked()) {
                 if( !textoRazao.isEmpty() ) { //verifica se a Razao Social foi preenchida
-                    if( !textoCNPJ.isEmpty() ) { //verifica se o CNPJ foi preenchido
+                    if( textoCNPJ != null ) { //verifica se o CNPJ foi preenchido
 
                     } else {
                         Toast.makeText(CadastroActivity.this,
@@ -119,7 +134,7 @@ public class CadastroActivity extends AppCompatActivity {
                 }
             } else {   //Valida as informações de pessoa física
                 if( !textoNome.isEmpty() ) { //verifica se o nome foi preenchido
-                    if( !textoCPF.isEmpty() ) { //verifica se o CPF foi preenchido
+                    if( textoCPF != null ) { //verifica se o CPF foi preenchido
 
                     } else {
                         Toast.makeText(CadastroActivity.this,
@@ -134,7 +149,7 @@ public class CadastroActivity extends AppCompatActivity {
             }
 //verifica se a senha confirmada é igual a digitada.
             //Volta ao fluxo normal de validação de cadastro
-            if( !textoTelefone.isEmpty() ) { //verifica se o Telefone foi preenchido
+            if( textoTelefone != null ) { //verifica se o Telefone foi preenchido
                 if( !textoEndereco.isEmpty() ) { //verifica se o Endereco foi preenchido
                     if( !textoEmail.isEmpty() ) { //verifica se o Email foi preenchido
                         if( !textoSenha.isEmpty() ) { //verifica se a senha foi preenchida
